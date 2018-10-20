@@ -39,7 +39,27 @@
           var infowindow = new naver.maps.InfoWindow({
               content: '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
           });
+          
+          var url = "http://openapi.seoul.go.kr:8088/687946576c73747939397a5a6c574c/json/MgisToilet/1/100/";
+          
+          var getJSON = function(url, callback) {
+        	  var xhr = new XMLHttpRequest();
+        	  xhr.open('GET', url, true);
+        	  xhr.responseType = 'json';
+        	  xhr.onload = function() {
+        		  var status = xhr.status;
+        		  if (status === 200) {
+        			  callback(xhr.response.MgisToilet, xhr.response);
+        		  } else{
+        			  callback(status, xhr.response);
+        		  }
+       		  };
+       		  xhr.send();
+       	  };
+       	  
+       	  getJSON("http://openapi.seoul.go.kr:8088/687946576c73747939397a5a6c574c/json/MgisToilet/1/100/", function(data){console.log(data)});
       });
+
       </script>
 </body>
 </html>
