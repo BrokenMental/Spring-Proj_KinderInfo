@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,11 +40,11 @@ public class MGCController {
 		
 		
 		try {
-			JSONObject servicecomb = service.selectgrid();
-			//System.out.println(servicecomb.toString().substring(12,servicecomb.toString().length()-10));
+			model.addAttribute("jdata",service.selectgrid());
 			
-			model.addAttribute("gdata",servicecomb.toString().substring(12,servicecomb.toString().length()-10));
-			model.addAttribute("gdatasize",servicecomb.toString().substring(servicecomb.toString().length()-2,servicecomb.toString().length()-1));
+			//JSONObject servicecomb = service.selectgrid();
+			//model.addAttribute("gdata",servicecomb.toString().substring(12,servicecomb.toString().length()-10));
+			//model.addAttribute("gdatasize",servicecomb.toString().substring(servicecomb.toString().length()-2,servicecomb.toString().length()-1));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<div id="realgrid" style="width: 100%; height: 300px;"></div>
+	<div id="realgrid" style="width: 100%; height: 600px;"></div>
 </body>
 <script type="text/javascript" src="resources/realgridjs-lic.js"></script>
 <script type="text/javascript"
@@ -34,15 +34,15 @@
 
 		//다섯개의 필드를 가진 배열 객체를 생성합니다.
 		var fields = [ {
-			fieldName : "field1"
+			fieldName : "kindername"
 		}, {
-			fieldName : "field2"
+			fieldName : "establish"
 		}, {
-			fieldName : "field3"
+			fieldName : "addr"
 		}, {
-			fieldName : "field4"
+			fieldName : "telno"
 		}, {
-			fieldName : "field5"
+			fieldName : "opertime"
 		} ];
 		
 		//DataProvider의 setFields함수로 필드를 입력합니다.
@@ -51,47 +51,47 @@
 		//필드와 연결된 컬럼 배열 객체를 생성합니다.
 		var columns = [ {
 			name : "col1",
-			fieldName : "field1",
+			fieldName : "kindername",
 			header : {
-				text : "name"
+				text : "유치원명"
 			},
-			width : 60
+			width : 170
 		}, {
 			name : "col2",
-			fieldName : "field2",
+			fieldName : "establish",
 			header : {
-				text : "artist"
+				text : "구분"
 			},
-			width : 50
+			width : 65
 		}, {
 			name : "col3",
-			fieldName : "field3",
+			fieldName : "addr",
 			header : {
-				text : "type"
+				text : "주소"
 			},
-			width : 80
+			width : 260
 		}, {
 			name : "col4",
-			fieldName : "field4",
+			fieldName : "telno",
 			header : {
-				text : "release"
+				text : "전화번호"
 			},
-			width : 80
+			width : 85
 		}, {
 			name : "col5",
-			fieldName : "field5",
+			fieldName : "opertime",
 			header : {
-				text : "genre"
+				text : "운영시간"
 			},
-			width : 80
+			width : 115
 		} ];
 
 		//컬럼을 GridView에 입력 합니다.
 		gridView.setColumns(columns);
 
 		// json 형식 데이터 넣기
-	    var data = ${gdata};
-	    dataProvider.setRows(data);
+	    //var data = ${jdata};
+	    dataProvider.setRows(${jdata}.kinderInfo);
 	    
 	    // 아래와 같은 형식으로 넣어도 무방하다.
 	    /* var data = [
@@ -108,8 +108,24 @@
 					fillMode : "append"
 				});
 			});
-		}) */
-
+		}); */
+		
+		// CORS 문제때문에 사용할 수 없음
+		/* $.ajax({
+			url : "http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28177",
+			cache : false
+		}).done(function(data) {
+			data = JSON.parse("{"+data.substring(data.indexOf(',')+1,data.length-1)+"}");
+			dataProvider.fillJsonData(data.kinderInfo, {
+				fillMode : "insert"
+			});
+		}); */
+		
+		// jquery foreach문
+		/* $(jdata.kinderInfo).each(function(index, jinfo){
+			console.log(jinfo.kindername);
+		}); */
+		
 	});
 </script>
 
