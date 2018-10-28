@@ -9,12 +9,16 @@
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
 </head>
 <body>
-	<div id="map" style="width: 100%; height: 1000px;"></div>
+	<div id="map" style="width: 100%; height: 800px;"></div>
 	<script>
 		var jdata = ${jdata};
-		var map = new naver.maps.Map('map');
-
-		var myaddress = '불정로 6';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+		var myaddress = '불정로 6'; // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+		
+		var map = new naver.maps.Map('map', {
+			center : new naver.maps.LatLng(37.4518922,126.6675283),
+			zoom: 9
+		});
+		
 		for (var i = 0; i <= jdata.kinderInfo.length; i++) {
 			myaddress = jdata.kinderInfo[i].addr;
 			naver.maps.Service.geocode(
@@ -30,15 +34,19 @@
 								// 검색 결과 갯수: result.total
 								// 첫번째 결과 결과 주소: result.items[0].address
 								// 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+								
 								var myaddr = new naver.maps.Point(
 										result.items[0].point.x,
 										result.items[0].point.y);
-								map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+								
+								//map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+								
 								// 마커 표시
 								var marker = new naver.maps.Marker({
 									position : myaddr,
 									map : map
 								});
+								
 								// 마커 클릭 이벤트 처리
 								naver.maps.Event.addListener(marker, "click",
 										function(e) {
@@ -46,12 +54,15 @@
 												infowindow.close();
 											} else {
 												infowindow.open(map, marker);
+												//console.log(result);
 											}
 										});
+								
 								// 마크 클릭시 인포윈도우 오픈
 								var infowindow = new naver.maps.InfoWindow(
 										{
-											content : '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
+											content : '매롱'
+											//content : '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
 										});
 
 							});

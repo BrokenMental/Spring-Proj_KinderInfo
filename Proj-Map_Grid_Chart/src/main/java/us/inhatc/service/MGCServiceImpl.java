@@ -31,9 +31,11 @@ public class MGCServiceImpl implements MGCService {
 	@Override
 	public JSONObject selectgrid() throws Exception {
 
+		// JSON형식으로 구성된 페이지 URL
 		JSONObject json = readJsonFromUrl(
 				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28177");
 		/*
+		 * //기존에 공중화장실 프로젝트에 활용하던 데이터
 		 * JSONArray garray = new JSONArray(); JSONObject gobj = new
 		 * JSONObject();
 		 * 
@@ -77,7 +79,8 @@ public class MGCServiceImpl implements MGCService {
 		return cobj;
 	}
 
-	// https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
+	// 참조 : https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
+	// http 형식의 페이지 읽어오기
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -87,6 +90,7 @@ public class MGCServiceImpl implements MGCService {
 		return sb.toString();
 	}
 
+	// JSON형태로 구성된 페이지 파싱하기
 	public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
 		InputStream is = new URL(url).openStream();
 		try {
@@ -100,8 +104,8 @@ public class MGCServiceImpl implements MGCService {
 			is.close();
 		}
 	}
-	// end
 
+	// 차트에 표현하기 위한 JSON형식 변환
 	public JSONObject forchart(ArrayList<ChartVO> tc, String cstr) {
 		JSONObject ctemp = new JSONObject();
 		JSONArray cja = new JSONArray();
