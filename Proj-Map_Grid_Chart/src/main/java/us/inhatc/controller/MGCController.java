@@ -27,6 +27,7 @@ public class MGCController {
 		
 		
 		try {
+			model.addAttribute("jdata",service.selectgrid());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
