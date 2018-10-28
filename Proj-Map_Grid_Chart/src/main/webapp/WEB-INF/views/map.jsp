@@ -12,11 +12,11 @@
 	<div id="map" style="width: 100%; height: 800px;"></div>
 	<script>
 		var jdata = ${jdata};
-		var myaddress = '불정로 6'; // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+		var myaddress = '인천광역시 남구 학익1동 인하로 100'; // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
 		
 		var map = new naver.maps.Map('map', {
-			center : new naver.maps.LatLng(37.4518922,126.6675283),
-			zoom: 9
+			center : new naver.maps.LatLng(37.44802,126.6553154),
+			zoom: 8
 		});
 		
 		for (var i = 0; i <= jdata.kinderInfo.length; i++) {

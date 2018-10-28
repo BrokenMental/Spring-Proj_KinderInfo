@@ -1,6 +1,6 @@
 package us.inhatc.service;
 
-import net.sf.json.JSONObject;
+import org.json.simple.JSONObject;
 
 public interface MGCService {
 	

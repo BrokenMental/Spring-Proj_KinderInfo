@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonParser;
+import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
 import us.inhatc.domain.ChartVO;
 import us.inhatc.domain.GridVO;
 import us.inhatc.persistence.MGCDAOImpl;
@@ -31,11 +31,23 @@ public class MGCServiceImpl implements MGCService {
 	@Override
 	public JSONObject selectgrid() throws Exception {
 
-		// JSON형식으로 구성된 페이지 URL
-		JSONObject json = readJsonFromUrl(
+		// JSON형식의 페이지 URL
+		String jsdata = readJsonFromUrl(
 				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28177");
+		jsdata = jsdata +","+ readJsonFromUrl(
+				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28185");
+		jsdata = "{\"kinderInfo\":["+jsdata +"," + readJsonFromUrl(
+				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28110")+"]}";
+
+		JSONParser ps = new JSONParser();
+		JSONObject jobj = (JSONObject)ps.parse(jsdata);
+		
+		/*JSONObject json = new JSONObject();
+		json.put("kinderInfo", (JSONObject)ps.parse(jsdata));
+		System.out.println(json);*/
+		
 		/*
-		 * //기존에 공중화장실 프로젝트에 활용하던 데이터
+		 * // 이전에 사용했던 공중화장실 JSON 데이터 변환하기
 		 * JSONArray garray = new JSONArray(); JSONObject gobj = new
 		 * JSONObject();
 		 * 
@@ -56,7 +68,7 @@ public class MGCServiceImpl implements MGCService {
 		 * garray.add(gtemp); } gobj.put("gridData",garray);
 		 * gobj.put("size",gvo.size());
 		 */
-		return json;
+		return jobj;
 	}
 
 	@Override
@@ -80,8 +92,8 @@ public class MGCServiceImpl implements MGCService {
 	}
 
 	// 참조 : https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
-	// http 형식의 페이지 읽어오기
-	private static String readAll(Reader rd) throws IOException {
+	// http JSON 페이지 가져오기
+	private String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
 		while ((cp = rd.read()) != -1) {
@@ -90,22 +102,20 @@ public class MGCServiceImpl implements MGCService {
 		return sb.toString();
 	}
 
-	// JSON형태로 구성된 페이지 파싱하기
-	public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+	// 읽어온 JSON형식의 페이지 변환하기
+	public String readJsonFromUrl(String url) throws IOException {
 		InputStream is = new URL(url).openStream();
 		try {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
-			jsonText = jsonText.substring(jsonText.indexOf('['), jsonText.length() - 1);
-			JSONObject json = new JSONObject();
-			json.put("kinderInfo", jsonText);
-			return json;
+			jsonText = jsonText.substring(jsonText.indexOf('[')+1, jsonText.length() - 2);
+			return jsonText;
 		} finally {
 			is.close();
 		}
 	}
 
-	// 차트에 표현하기 위한 JSON형식 변환
+	// JSON 형식의 Chart 변환하기
 	public JSONObject forchart(ArrayList<ChartVO> tc, String cstr) {
 		JSONObject ctemp = new JSONObject();
 		JSONArray cja = new JSONArray();
