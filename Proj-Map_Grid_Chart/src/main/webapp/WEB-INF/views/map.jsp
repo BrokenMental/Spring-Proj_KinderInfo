@@ -21,8 +21,16 @@
 			zoom : 8
 		});
 		
-		for (var i = 0; i < jdata.kinderInfo.length; i++) {
-			myaddress = jdata.kinderInfo[i].addr;
+		test(function(){
+			for (var i = 0; i < jdata.kinderInfo.length; i++) {
+				myaddress = jdata.kinderInfo[i].addr;
+				test(myaddress);
+			}
+			console.log(markers.length);
+		});
+		
+		function test(myaddress,callbackFunc) {
+			console.log(myaddress);
 			naver.maps.Service.geocode({
 				address : myaddress
 			},function(status, response) {
@@ -42,6 +50,8 @@
 				});
 
 				markers.push(marker);
+				//console.log(markers.pop().position);
+				//markers.push();
 				
 				naver.maps.Event.addListener(marker, "click", function(e) {
 				    if (infowindow.getMap()) {
@@ -56,6 +66,7 @@
 				});
 				
 				infowindows.push(infowindow);
+				callbackFunc();
 			});
 		}
 		
