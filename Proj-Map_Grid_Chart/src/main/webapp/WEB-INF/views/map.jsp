@@ -12,36 +12,23 @@
 	<div id="map" style="width: 100%; height: 800px;"></div>
 	<script>
 		var jdata = ${jdata};
-		var myaddress = '인천광역시 남구 학익1동 인하로 100';
-		var infowindows = [],
-			markers = [];
-		
+		var infowindows = [], markers = [], adds = [];
+
 		var map = new naver.maps.Map('map', {
 			center : new naver.maps.LatLng(37.44802, 126.6553154),
 			zoom : 8
 		});
-		
-		test(function(){
-			for (var i = 0; i < jdata.kinderInfo.length; i++) {
-				myaddress = jdata.kinderInfo[i].addr;
-				test(myaddress);
-			}
-			console.log(markers.length);
-		});
-		
-		function test(myaddress,callbackFunc) {
-			console.log(myaddress);
+
+		for (var i = 0; i < jdata.kinderInfo.length; i++) {
+			var myaddress = jdata.kinderInfo[i].addr;
 			naver.maps.Service.geocode({
 				address : myaddress
-			},function(status, response) {
+			}, function(status, response) {
 				if (status !== naver.maps.Service.Status.OK) {
 					return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
 				}
 				var result = response.result;
-				// 검색 결과 갯수: result.total
-				// 첫번째 결과 결과 주소: result.items[0].address
-				// 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
-				
+
 				var marker = new naver.maps.Marker({
 					position : new naver.maps.LatLng(
 							result.items[0].point.y,
@@ -50,25 +37,30 @@
 				});
 
 				markers.push(marker);
-				
+				adds.push(result.items[0].address);
+
+				var infowindow = new naver.maps.InfoWindow();
+
 				naver.maps.Event.addListener(marker, "click", function(e) {
-				    if (infowindow.getMap()) {
-				        infowindow.close();
-				    } else {
-				        infowindow.open(map, marker);
-				    }
+					for(var j=0; j<markers.length; j++){
+						if(markers[j].position === marker.position){
+							for(var k=0; k<adds.length; k++){
+								if(adds[j].match((jdata.kinderInfo[k].addr))){
+									if (infowindow.getMap()) {
+										infowindow.close();
+									} else {
+										infowindow.setContent(jdata.kinderInfo[k].kindername);
+										infowindow.open(map, marker);
+									}
+								}
+							}
+						}
+					}
 				});
 				
-				var infowindow = new naver.maps.InfoWindow({
-				    content: '<h4>'+ myaddress +'</h4>'
-				});
 				
-				infowindows.push(infowindow);
-				callbackFunc();
 			});
 		}
-		console.log(markers);
-		
 	</script>
 </body>
 </html>
