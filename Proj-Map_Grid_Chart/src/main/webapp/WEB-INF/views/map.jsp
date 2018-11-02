@@ -12,7 +12,7 @@
 	<div id="map" style="width: 100%; height: 800px;"></div>
 	<script>
 		var jdata = ${jdata};
-		var myaddress = '인천광역시 남구 학익1동 인하로 100'; // 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+		var myaddress = '인천광역시 남구 학익1동 인하로 100';
 		var infowindows = [],
 			markers = [];
 		
@@ -50,8 +50,6 @@
 				});
 
 				markers.push(marker);
-				//console.log(markers.pop().position);
-				//markers.push();
 				
 				naver.maps.Event.addListener(marker, "click", function(e) {
 				    if (infowindow.getMap()) {
@@ -69,6 +67,7 @@
 				callbackFunc();
 			});
 		}
+		console.log(markers);
 		
 	</script>
 </body>
