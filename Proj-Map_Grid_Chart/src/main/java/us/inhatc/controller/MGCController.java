@@ -29,6 +29,8 @@ public class MGCController {
 		try {
 			model.addAttribute("jdata",service.selectgrid());
 			
+			JSONObject servicecomb = service.selectchart();
+			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
