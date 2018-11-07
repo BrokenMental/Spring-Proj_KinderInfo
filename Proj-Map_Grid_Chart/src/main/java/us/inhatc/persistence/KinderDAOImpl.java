@@ -11,12 +11,12 @@ import us.inhatc.domain.ChartVO;
 import us.inhatc.domain.GridVO;
 
 @Repository
-public class MGCDAOImpl{
+public class KinderDAOImpl{
 
 	@Inject
 	private SqlSession session;
 
-	private static String namespace = "us.inhatc.mappers.MGCMapper";
+	private static String namespace = "us.inhatc.mappers.KinderMapper";
 
 	public List<GridVO> selectgrid() throws Exception {
 		return session.selectList(namespace + ".selectgrid");

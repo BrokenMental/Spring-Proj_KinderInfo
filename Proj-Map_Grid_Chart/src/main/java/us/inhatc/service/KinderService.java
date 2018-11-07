@@ -2,7 +2,7 @@ package us.inhatc.service;
 
 import org.json.simple.JSONObject;
 
-public interface MGCService {
+public interface KinderService {
 	
 	public JSONObject selectgrid()throws Exception;
 	

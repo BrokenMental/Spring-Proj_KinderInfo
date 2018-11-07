@@ -20,13 +20,13 @@ import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
 import us.inhatc.domain.ChartVO;
 import us.inhatc.domain.GridVO;
-import us.inhatc.persistence.MGCDAOImpl;
+import us.inhatc.persistence.KinderDAOImpl;
 
 @Service
-public class MGCServiceImpl implements MGCService {
+public class KinderServiceImpl implements KinderService {
 
 	@Inject
-	private MGCDAOImpl dao;
+	private KinderDAOImpl dao;
 
 	@Override
 	public JSONObject selectgrid() throws Exception {

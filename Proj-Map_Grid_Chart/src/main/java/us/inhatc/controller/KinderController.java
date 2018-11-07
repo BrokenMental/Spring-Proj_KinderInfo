@@ -9,23 +9,21 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import us.inhatc.service.MGCService;
+import us.inhatc.service.KinderService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class MGCController {
+public class KinderController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(GridController.class);
 
 	@Inject
-	private MGCService service;
+	private KinderService service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String map(Model model) {
-		
-		
+	public String main(Model model) {
 		try {
 			model.addAttribute("jdata",service.selectgrid());
 			
@@ -35,7 +33,19 @@ public class MGCController {
 			e.printStackTrace();
 		}
 		
-		return "/map";
+		return "/main";
+	}
+
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public String map(Model model) {
+		try {
+			model.addAttribute("jdata",service.selectgrid());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/func/map";
 	}
 	
 	@RequestMapping(value = "/grid", method = RequestMethod.GET)
