@@ -7,23 +7,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유치원 정보 검색 사이트</title>
 <style type="text/css">
+	#area {
+		margin-top: 6px;
+		margin-left: 6px;
+	}
+	
+	#condition {
+		margin-left: 6px;
+	}
+	
 	#realgrid {
 		height: 650px;
-		width: 50%;
+		width: 49%;
 		float: left;
+		margin: 6px;
 	}
 	#map {
 		height: 650px;
-		width: 50%;
+		width: 49%;
 		float: right;
+		margin: 6px;
 	}
-	#container {
-		clear: both;
+	
+	#chartarea {
+		margin-left: 6px;
+		margin-top: 10px;
 	}
 </style>
 </head>
 <body>
-	<div>
+	<div id="area">
 		지역 : 
 		<select>
 			<option>인천</option>
@@ -32,7 +45,7 @@
 			<option>미추홀구</option>
 		</select>
 	</div>
-	<div>
+	<div id="condition">
 		조건 : 
 		<input type="checkbox" name="chk1" value="통학차량">통학차량
 		<input type="checkbox" name="chk1" value="급식">급식
@@ -42,11 +55,11 @@
 	</div>
 	<div id="realgrid"></div>
 	<div id="map"></div>
-	<div>
-		지역 정보
+	<div id="chartarea">
+		지역정보
+		<div id="container"></div>
+		<div id="highchart"></div>
 	</div>
-	<div id="container"></div>
-	<div id="highchart"></div>
 	<!--naver map-->
 	<script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
@@ -200,16 +213,20 @@
 		Highcharts.chart('container', {
 
 			title : {
-				text : 'Solar Employment Growth by Sector, 2010-2016'
+				text : '인천지역별 범죄율, 2010-2017'
 			},
 
 			subtitle : {
-				text : 'Source: thesolarfoundation.com'
+				text : '경찰서별 5대강력범죄'
+			},
+			
+			xAxis : {
+				categories:['2010','2011','2012','2013','2014','2015','2016','2017']
 			},
 
 			yAxis : {
 				title : {
-					text : 'Number of Employees'
+					text : '범죄횟수'
 				}
 			},
 			legend : {
