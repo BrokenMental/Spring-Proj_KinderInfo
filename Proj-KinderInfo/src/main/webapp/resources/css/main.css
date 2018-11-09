@@ -22,6 +22,7 @@
 }
 
 #chartarea {
+	clear: both;
 	margin-left: 6px;
 	margin-top: 10px;
 }

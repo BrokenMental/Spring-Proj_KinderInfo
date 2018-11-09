@@ -35,7 +35,7 @@ Highcharts.chart('container', {
 		}
 	},
 
-	series : cdata,
+	series : crimedata,
 
 	responsive : {
 		rules : [ {
