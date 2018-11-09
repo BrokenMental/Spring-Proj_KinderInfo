@@ -1,0 +1,27 @@
+#area {
+	margin-top: 6px;
+	margin-left: 6px;
+}
+
+#condition {
+	margin-left: 6px;
+}
+
+#realgrid {
+	height: 650px;
+	width: 49%;
+	float: left;
+	margin: 6px;
+}
+
+#map {
+	height: 650px;
+	width: 49%;
+	float: right;
+	margin: 6px;
+}
+
+#chartarea {
+	margin-left: 6px;
+	margin-top: 10px;
+}
