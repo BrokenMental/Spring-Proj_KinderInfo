@@ -29,7 +29,7 @@
 	<div id="realgrid"></div>
 	<div id="map"></div>
 	<div id="chartarea">
-		지역정보
+		<h1>지역정보</h1>
 		<div id="container"></div>
 		<div id="highchart"></div>
 	</div>
@@ -37,6 +37,7 @@
 	<script>
 		var jdata = ${jdata};
 		var cdata = ${cdata};
+		var crimedata = ${crimedata};
 	</script>
 	<!--response data end-->
 	
