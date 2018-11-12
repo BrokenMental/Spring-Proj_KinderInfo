@@ -64,5 +64,13 @@
 	<script src="resources/export-data.js"></script>
 	<script src="resources/js/chart.js"></script>
 	<!--high chart end-->
+	
+	<!-- mapping code start -->
+	<script>
+		gridView.onDataCellClicked = function (grid, index) {
+	       console.log("onDataCellClicked: " + JSON.stringify(index));
+	    };
+	</script>
+	<!-- mapping code end -->
 </body>
 </html>
