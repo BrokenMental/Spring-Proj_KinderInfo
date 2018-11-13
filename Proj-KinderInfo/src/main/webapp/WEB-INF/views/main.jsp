@@ -68,8 +68,15 @@
 	<!-- mapping code start -->
 	<script>
 		gridView.onDataCellClicked = function (grid, index) {
-	       console.log("onDataCellClicked: " + JSON.stringify(index));
+ 		    map.setCenter(markers[index.dataRow].position);
+ 		    map.setZoom(8, true);
+			infowindow.setContent(jdata.kinderInfo[index.dataRow].kindername);
+ 		    infowindow.open(map, markers[index.dataRow]);
 	    };
+	    
+	    naver.maps.Event.addListener(map, "click", function(e) {
+			//셀 포커스 하기
+	    });
 	</script>
 	<!-- mapping code end -->
 </body>

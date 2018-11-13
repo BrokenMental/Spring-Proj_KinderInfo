@@ -12,16 +12,19 @@
 	<div id="map" style="width: 100%; height: 800px;"></div>
 	<script>
 		var jdata = ${jdata};
-		var infowindows = [], markers = [], adds = [];
-		var evt;
+		var markers = [], adds = []; // markers : 피커 정보, adds : 주소
 
 		var map = new naver.maps.Map('map', {
 			center : new naver.maps.LatLng(37.44802, 126.6553154),
 			zoom : 8
 		});
-
+		
 		for (var i = 0; i < jdata.kinderInfo.length; i++) {
 			var myaddress = jdata.kinderInfo[i].addr;
+			mapgo(myaddress);
+		}
+		
+		function mapgo(myaddress){
 			naver.maps.Service.geocode({
 				address : myaddress
 			}, function(status, response) {
@@ -29,7 +32,7 @@
 					return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
 				}
 				var result = response.result;
-
+	
 				var marker = new naver.maps.Marker({
 					position : new naver.maps.LatLng(
 							result.items[0].point.y,
@@ -39,10 +42,10 @@
 
 				markers.push(marker);
 				adds.push(result.items[0].address);
-
+	
 				var infowindow = new naver.maps.InfoWindow();
-
-				evt = naver.maps.Event.addListener(marker, "click", function(e) {
+				
+				naver.maps.Event.addListener(marker, "click", function(e) {
 					for(var j=0; j<markers.length; j++){
 						if(markers[j].position === marker.position){
 							for(var k=0; k<adds.length; k++){
@@ -50,12 +53,13 @@
 									if (infowindow.getMap()) {
 										infowindow.close();
 									} else {
+							 		    map.setCenter(marker.position);
+							 		    map.setZoom(8, true);
 										infowindow.setContent(jdata.kinderInfo[k].kindername);
 										infowindow.open(map, marker);
-										//console.log(infowindow.getContent());
-										for(var iw in infowindow.getContent()){
-											//console.log("infowindow : " + iw);
-										}
+										//for(var iw in infowindow.getContent()){
+										//	console.log("infowindow : " + iw);
+										//}
 									}
 								}
 							}
@@ -63,16 +67,8 @@
 					}
 
 				});
-
-				//console.log(adds);
-				for(var ad in adds){
-					//console.log(ev);
-					//console.log(ad);
-				}
-				
 			});
 		}
-		console.log(evt);
 	</script>
 </body>
 </html>

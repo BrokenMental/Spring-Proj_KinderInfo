@@ -1,11 +1,12 @@
 /*-----------
   naver map
 -----------*/
-var infowindows = [], markers = [], adds = [];
+var markers = [], adds = []; // markers : 피커 정보, adds : 주소
 var map = new naver.maps.Map('map', {
 	center : new naver.maps.LatLng(37.44802, 126.6553154),
 	zoom : 8
 });
+var infowindow = new naver.maps.InfoWindow();
 
 for (var i = 0; i < jdata.kinderInfo.length; i++) {
 	var myaddress = jdata.kinderInfo[i].addr;
@@ -29,8 +30,6 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 			markers.push(marker);
 			adds.push(result.items[0].address);
 
-			var infowindow = new naver.maps.InfoWindow();
-
 			naver.maps.Event.addListener(marker, "click",
 				function(e) {
 					for (var j = 0; j < markers.length; j++) {
@@ -40,6 +39,8 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 									if (infowindow.getMap()) {
 										infowindow.close();
 									} else {
+							 		    map.setCenter(marker.position);
+							 		    map.setZoom(8, true);
 										infowindow.setContent(jdata.kinderInfo[k].kindername);
 										infowindow.open(map, marker);
 									}
