@@ -13,6 +13,7 @@
 	<script>
 		var jdata = ${jdata};
 		var infowindows = [], markers = [], adds = [];
+		var evt;
 
 		var map = new naver.maps.Map('map', {
 			center : new naver.maps.LatLng(37.44802, 126.6553154),
@@ -41,7 +42,7 @@
 
 				var infowindow = new naver.maps.InfoWindow();
 
-				naver.maps.Event.addListener(marker, "click", function(e) {
+				evt = naver.maps.Event.addListener(marker, "click", function(e) {
 					for(var j=0; j<markers.length; j++){
 						if(markers[j].position === marker.position){
 							for(var k=0; k<adds.length; k++){
@@ -51,16 +52,27 @@
 									} else {
 										infowindow.setContent(jdata.kinderInfo[k].kindername);
 										infowindow.open(map, marker);
+										//console.log(infowindow.getContent());
+										for(var iw in infowindow.getContent()){
+											//console.log("infowindow : " + iw);
+										}
 									}
 								}
 							}
 						}
 					}
+
 				});
-				
+
+				//console.log(adds);
+				for(var ad in adds){
+					//console.log(ev);
+					//console.log(ad);
+				}
 				
 			});
 		}
+		console.log(evt);
 	</script>
 </body>
 </html>

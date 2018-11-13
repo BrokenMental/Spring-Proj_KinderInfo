@@ -126,6 +126,10 @@
 			console.log(jinfo.kindername);
 		}); */
 		
+		gridView.onDataCellClicked = function (grid, index) {
+			console.log(grid.getValues(index.dataRow).kindername);
+	    };
+		
 	});
 </script>
 
