@@ -70,6 +70,7 @@
 		gridView.onDataCellClicked = function (grid, index) {
 	       console.log("onDataCellClicked: " + JSON.stringify(index));
 	    };
+	    
 	</script>
 	<!-- mapping code end -->
 </body>
