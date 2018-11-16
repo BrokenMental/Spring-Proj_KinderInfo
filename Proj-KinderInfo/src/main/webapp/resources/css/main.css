@@ -9,8 +9,7 @@
 
 #backdiv {
 	height: 650px;
-	width: 98%;
-	margin: 6px;
+	width: 99%;
 	position: absolute;
 	z-index: 1;
 }
@@ -18,21 +17,19 @@
 #map {
 	height: 100%;
 	width: 100%;
-	margin: 6px;
 }
 
 #frontdiv {
-	height: 500px;
+	height: 350px;
 	width: 230px;
-	margin: 6px;
+	margin: 20px;
 	position: relative;
 	z-index: 2;
 }
 
 #realgrid {
-	height: 70%;
+	height: 100%;
 	width: 100%;
-	padding: 20px;
 }
 
 #chartarea {
