@@ -26,12 +26,16 @@
 		<input type="checkbox" name="chk1" value="사립">사립
 		<input type="button" name="search" value="검색">
 	</div>
-	<div id="realgrid"></div>
-	<div id="map"></div>
-	<div id="chartarea">
-		<h1>지역정보</h1>
-		<div id="container"></div>
-		<div id="highchart"></div>
+	<div id="backdiv">
+		<div id="map"></div>
+		<div id="chartarea">
+			<h1>지역정보</h1>
+			<div id="container"></div>
+			<div id="highchart"></div>
+		</div>
+	</div>
+	<div id="frontdiv">
+		<div id="realgrid"></div>
 	</div>
 	<!--response data start-->
 	<script>

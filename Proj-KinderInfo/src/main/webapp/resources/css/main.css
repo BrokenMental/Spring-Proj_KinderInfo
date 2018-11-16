@@ -7,21 +7,37 @@
 	margin-left: 6px;
 }
 
-#realgrid {
+#backdiv {
 	height: 650px;
-	width: 49%;
-	float: left;
+	width: 98%;
 	margin: 6px;
+	position: absolute;
+	z-index: 1;
 }
 
 #map {
-	height: 650px;
-	width: 49%;
+	height: 100%;
+	width: 100%;
 	margin: 6px;
+}
+
+#frontdiv {
+	height: 500px;
+	width: 230px;
+	margin: 6px;
+	position: relative;
+	z-index: 2;
+}
+
+#realgrid {
+	height: 70%;
+	width: 100%;
+	padding: 20px;
 }
 
 #chartarea {
 	clear: both;
-	margin-left: 6px;
-	margin-top: 10px;
+	width: 100%;
+	position: absolute;
+	z-index: 1;
 }
