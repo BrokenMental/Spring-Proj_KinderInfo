@@ -129,7 +129,22 @@
 		gridView.onDataCellClicked = function (grid, index) {
 			console.log(grid.getValues(index.dataRow).kindername);
 	    };
-		
+	    
+	    gridView.setPaging(true, 10);
+
+	    page = gridView.getPage();
+	    totalPage = gridView.getPageCount();
+
+	    $(".current-page-view").text(page);
+	    $(".total-page-view").text(${jdata}.kinderInfo.length);
+	    
+	    gridView.onPageChanged = function(grid, page) {
+    	  $(".current-page-view").text(page);
+    	}
+
+    	gridView.onPageCountChanged = function(grid, pageCount) {
+    	  $(".total-page-view").text(${jdata}.kinderInfo.length);
+    	}
 	});
 </script>
 

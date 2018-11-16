@@ -30,25 +30,29 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 			markers.push(marker);
 			adds.push(result.items[0].address);
 
-			naver.maps.Event.addListener(marker, "click",
-				function(e) {
-					for (var j = 0; j < markers.length; j++) {
-						if (markers[j].position === marker.position) {
-							for (var k = 0; k < adds.length; k++) {
-								if (adds[j].match((jdata.kinderInfo[k].addr))) {
-									if (infowindow.getMap()) {
-										infowindow.close();
-									} else {
-							 		    map.setCenter(marker.position);
-							 		    map.setZoom(8, true);
-										infowindow.setContent(jdata.kinderInfo[k].kindername);
-										infowindow.open(map, marker);
-									}
+			naver.maps.Event.addListener(marker, "click", function(e) {
+				for (var j = 0; j < markers.length; j++) {
+					if (markers[j].position === marker.position) {
+						for (var k = 0; k < adds.length; k++) {
+							if (adds[j].match((jdata.kinderInfo[k].addr))) {
+								if (infowindow.getMap()) {
+									infowindow.close();
+								} else {
+						 		    map.setCenter(marker.position);
+						 		    map.setZoom(8, true);
+									infowindow.setContent(jdata.kinderInfo[k].kindername);
+									infowindow.open(map, marker);
+									
+								    gridView.setSelectOptions({"style" : "rows"});
+									var current = {};
+									current.dataRow = k;
+									gridView.setCurrent(current);
 								}
 							}
 						}
 					}
-				});
+				}
+			});
 
 		});
 }

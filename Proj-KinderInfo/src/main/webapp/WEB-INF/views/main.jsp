@@ -41,12 +41,6 @@
 	</script>
 	<!--response data end-->
 	
-	<!--naver map start-->
-	<script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
-	<script src="resources/js/map.js"></script>
-	<!--naver map start end-->
-	
 	<!--real grid start-->
 	<script type="text/javascript" src="resources/realgridjs-lic.js"></script>
 	<script type="text/javascript"
@@ -65,19 +59,14 @@
 	<script src="resources/js/chart.js"></script>
 	<!--high chart end-->
 	
+	<!--naver map start-->
+	<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
+	<script src="resources/js/map.js"></script>
+	<!--naver map start end-->
+	
 	<!-- mapping code start -->
-	<script>
-		gridView.onDataCellClicked = function (grid, index) {
- 		    map.setCenter(markers[index.dataRow].position);
- 		    map.setZoom(8, true);
-			infowindow.setContent(jdata.kinderInfo[index.dataRow].kindername);
- 		    infowindow.open(map, markers[index.dataRow]);
-	    };
-	    
-	    naver.maps.Event.addListener(map, "click", function(e) {
-			//셀 포커스 하기
-	    });
-	</script>
+	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
 </body>
 </html>
