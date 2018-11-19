@@ -10,9 +10,10 @@ RealGridJS.setRootContext("resources");
 dataProvider = new RealGridJS.LocalDataProvider();
 gridView = new RealGridJS.GridView("realgrid");
 gridView.setDataSource(dataProvider);
+gridView.setPanel({visible:false}); // 상단 그루핑 패널
 gridView.setStateBar({visible: false}); // 숫자 옆 공백
 gridView.setOptions({
-    indicator: {zeroBase: false}, // ? 뭐지
+    indicator: {zeroBase: false}, // 상태바
     checkBar: {visible: false} // 체크바
 });
 
@@ -40,35 +41,7 @@ var columns = [ {
 		text : "유치원명"
 	},
 	width : 170
-}, {
-	name : "col2",
-	fieldName : "establish",
-	header : {
-		text : "구분"
-	},
-	width : 65
-}, {
-	name : "col3",
-	fieldName : "addr",
-	header : {
-		text : "주소"
-	},
-	width : 260
-}, {
-	name : "col4",
-	fieldName : "telno",
-	header : {
-		text : "전화번호"
-	},
-	width : 85
-}, {
-	name : "col5",
-	fieldName : "opertime",
-	header : {
-		text : "운영시간"
-	},
-	width : 115
-} ];
+}];
 
 //컬럼을 GridView에 입력 합니다.
 gridView.setColumns(columns);
