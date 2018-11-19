@@ -10,7 +10,7 @@
 <body>
 	<div id="backdiv">
 		<div id="header">
-			<%@include file="header.jsp"%>
+			<%@include file="include/header.jsp"%>
 		</div>
 		<div id="map">
 			<div class="frontdiv">

@@ -1,6 +1,6 @@
-/Proj-KinderInfo/
-# Created by https://www.gitignore.io/api/java,windows,eclipse
-# Edit at https://www.gitignore.io/?templates=java,windows,eclipse
+
+# Created by https://www.gitignore.io/api/java,maven,windows,eclipse,java-web
+# Edit at https://www.gitignore.io/?templates=java,maven,windows,eclipse,java-web
 
 ### Eclipse ###
 
@@ -76,14 +76,6 @@ local.properties
 # Compiled class file
 *.class
 
-### Maven ###
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-
 # Log file
 *.log
 
@@ -104,6 +96,21 @@ release.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+### Java-Web ###
+## ignoring target file
+target/
+
+### Maven ###
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -130,4 +137,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/java,windows,eclipse
+# End of https://www.gitignore.io/api/java,maven,windows,eclipse,java-web
