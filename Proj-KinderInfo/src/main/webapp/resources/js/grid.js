@@ -10,7 +10,8 @@ RealGridJS.setRootContext("resources");
 dataProvider = new RealGridJS.LocalDataProvider();
 gridView = new RealGridJS.GridView("realgrid");
 gridView.setDataSource(dataProvider);
-gridView.setPanel({visible:false}); // 상단 그루핑 패널
+gridView.setPanel({visible:false}); // 상단바(그루핑 영역)
+gridView.setFooter({visible: false}); // 하단바
 gridView.setStateBar({visible: false}); // 숫자 옆 공백
 gridView.setOptions({
     indicator: {zeroBase: false}, // 상태바
