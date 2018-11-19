@@ -1,10 +1,18 @@
-#area {
-	margin-top: 6px;
-	margin-left: 6px;
+.top_bar_fix {
+	position:fixed; 
+	top:0; 
+	left:0; 
+	width:100%;
 }
 
-#condition {
-	margin-left: 6px;
+.pd_top_80 {
+	padding: 20px;
+	background-color: orange;
+}
+
+#topBar {
+	padding: 20px;
+	background-color: orange;
 }
 
 #backdiv {
@@ -12,11 +20,6 @@
 	width: 99%;
 	position: absolute;
 	z-index: 1;
-}
-
-#header {
-	height: 10%;
-	width: 100%;
 }
 
 #map {
@@ -30,6 +33,11 @@
 	margin: 20px;
 	position: relative;
 	z-index: 2;
+}
+
+.front_top {
+	position: relative;
+	z-index: 10000;
 }
 
 #realgrid {

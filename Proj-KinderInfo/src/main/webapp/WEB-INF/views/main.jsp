@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="backdiv">
-		<div id="header">
+		<div class="front_top">
 			<%@include file="include/header.jsp"%>
 		</div>
 		<div id="map">
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<!--response data start-->
-	<script>
+	<script type="text/javascript">
 		var jdata = ${jdata};
 		var cdata = ${cdata};
 		var crimedata = ${crimedata};
