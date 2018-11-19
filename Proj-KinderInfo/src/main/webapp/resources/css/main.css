@@ -14,12 +14,17 @@
 	z-index: 1;
 }
 
+#header {
+	height: 10%;
+	width: 100%;
+}
+
 #map {
 	height: 100%;
 	width: 100%;
 }
 
-#frontdiv {
+.frontdiv {
 	height: 350px;
 	width: 230px;
 	margin: 20px;

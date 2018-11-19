@@ -6,36 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유치원 정보 검색 사이트</title>
-<link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 </head>
 <body>
-	<div id="area">
-		지역 : 
-		<select>
-			<option>인천</option>
-		</select>
-		<select>
-			<option>미추홀구</option>
-		</select>
-	</div>
-	<div id="condition">
-		조건 : 
-		<input type="checkbox" name="chk1" value="통학차량">통학차량
-		<input type="checkbox" name="chk1" value="급식">급식
-		<input type="checkbox" name="chk1" value="국공립">국공립
-		<input type="checkbox" name="chk1" value="사립">사립
-		<input type="button" name="search" value="검색">
-	</div>
 	<div id="backdiv">
-		<div id="map"></div>
+		<div id="header">
+			<%@include file="header.jsp"%>
+		</div>
+		<div id="map">
+			<div class="frontdiv">
+				<div id="realgrid"></div>
+			</div>
+		</div>
 		<div id="chartarea">
 			<h1>지역정보</h1>
 			<div id="container"></div>
 			<div id="highchart"></div>
 		</div>
-	</div>
-	<div id="frontdiv">
-		<div id="realgrid"></div>
 	</div>
 	<!--response data start-->
 	<script>
@@ -44,7 +30,7 @@
 		var crimedata = ${crimedata};
 	</script>
 	<!--response data end-->
-	
+
 	<!--real grid start-->
 	<script type="text/javascript" src="resources/realgridjs-lic.js"></script>
 	<script type="text/javascript"
@@ -54,7 +40,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="resources/js/grid.js"></script>
 	<!--real grid end-->
-	
+
 	<!--high chart start-->
 	<script src="resources/highcharts.js"></script>
 	<script src="resources/series-label.js"></script>
@@ -62,13 +48,13 @@
 	<script src="resources/export-data.js"></script>
 	<script src="resources/js/chart.js"></script>
 	<!--high chart end-->
-	
+
 	<!--naver map start-->
 	<script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
 	<script src="resources/js/map.js"></script>
 	<!--naver map start end-->
-	
+
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
