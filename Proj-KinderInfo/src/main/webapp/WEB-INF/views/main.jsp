@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="backdiv">
-		<div id="header">
+		<div class="front_top">
 			<%@include file="include/header.jsp"%>
 		</div>
 		<div id="map">
@@ -24,10 +24,31 @@
 		</div>
 	</div>
 	<!--response data start-->
-	<script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
 		var jdata = ${jdata};
 		var cdata = ${cdata};
 		var crimedata = ${crimedata};
+		
+		$(document).ready(function(){
+
+			var topBar = $("#topBar").offset();
+
+			$(window).scroll(function(){
+				
+				var docScrollY = $(document).scrollTop()
+				var barThis = $("#topBar")
+				var fixNext = $("#frontdiv")
+
+				if( docScrollY > topBar.top ) {
+					barThis.addClass("top_bar_fix");
+					fixNext.addClass("pd_top_80");
+				}else{
+					barThis.removeClass("top_bar_fix");
+					fixNext.removeClass("pd_top_80");
+				}
+			});
+		})
 	</script>
 	<!--response data end-->
 

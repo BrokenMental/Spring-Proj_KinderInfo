@@ -8,17 +8,15 @@
 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 </head>
 <body>
-	<div id="area">
-		지역 : 
+	<div class="top_fix_zone" id="topBar">
+		지역 
 		<select>
 			<option>인천</option>
 		</select>
 		<select>
 			<option>미추홀구</option>
-		</select>
-	</div>
-	<div id="condition">
-		조건 : 
+		</select><br>
+		조건 
 		<input type="checkbox" name="chk1" value="통학차량">통학차량
 		<input type="checkbox" name="chk1" value="급식">급식
 		<input type="checkbox" name="chk1" value="국공립">국공립
