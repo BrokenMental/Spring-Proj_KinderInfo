@@ -31,6 +31,12 @@
 		dataProvider = new RealGridJS.LocalDataProvider();
 		gridView = new RealGridJS.GridView("realgrid");
 		gridView.setDataSource(dataProvider);
+		gridView.setPanel({visible:false}); // 상단 그루핑 패널
+		gridView.setStateBar({visible: false}); // 숫자 옆 공백
+		gridView.setOptions({
+		    indicator: {zeroBase: false}, // 상태바
+		    checkBar: {visible: false}, // 체크바
+		});
 
 		//다섯개의 필드를 가진 배열 객체를 생성합니다.
 		var fields = [ {
