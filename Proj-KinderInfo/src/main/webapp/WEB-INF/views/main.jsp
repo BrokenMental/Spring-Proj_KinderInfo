@@ -8,21 +8,16 @@
 <title>유치원 정보 검색 사이트</title>
 </head>
 <body>
-	<div id="backdiv">
-		<div class="front_top">
-			<%@include file="include/header.jsp"%>
-		</div>
-		<div id="map">
-			<div class="frontdiv">
-				<div id="realgrid"></div>
-			</div>
-		</div>
-		<div id="chartarea">
-			<h1>지역정보</h1>
-			<div id="container"></div>
-			<div id="highchart"></div>
-		</div>
+	<div class="backdiv" id="header">
+		<%@include file="include/header.jsp"%>
 	</div>
+	<div class="backdiv" id="map">
+		<div class="frontdiv" id="realgrid"></div>
+		<div class="frontdiv" id="detaildiv"></div>
+	</div>
+	<h1>지역정보</h1>
+	<div class="backdiv" id="container"></div>
+	<div class="backdiv" id="highchart"></div>
 	<!--response data start-->
 	<script type="text/javascript">
 		var jdata = ${jdata};
@@ -58,5 +53,9 @@
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
+	
+	<script>
+		//document.getElementById("detaildiv").style.display="none";
+	</script>
 </body>
 </html>

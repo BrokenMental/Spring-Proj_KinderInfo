@@ -5,20 +5,20 @@ gridView.onDataCellClicked = function(grid, index) {
 	infowindow.open(map, markers[index.dataRow]);
 };
 
+//header fix start
 var topBar = $("#topBar").offset();
 
-// haeder fix
 $(window).scroll(function(){
 	
 	var docScrollY = $(document).scrollTop()
 	var barThis = $("#topBar")
-	var fixNext = $("#frontdiv")
 
 	if( docScrollY > topBar.top ) {
-		barThis.addClass("top_bar_fix");
-		fixNext.addClass("pd_top_80");
+		barThis.addClass("topBar_fix");
 	}else{
-		barThis.removeClass("top_bar_fix");
-		fixNext.removeClass("pd_top_80");
+		barThis.removeClass("topBar_fix");
 	}
 });
+//header fix end
+
+

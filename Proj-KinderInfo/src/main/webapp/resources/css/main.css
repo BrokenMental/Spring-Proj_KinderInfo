@@ -1,13 +1,19 @@
-.top_bar_fix {
+.topBar_fix {
 	position:fixed; 
 	top:0; 
 	left:0; 
 	width:100%;
 }
 
-.pd_top_80 {
-	padding: 20px;
-	background-color: orange;
+.frontdiv {
+	position: relative;
+	z-index: 2;
+}
+
+.backdiv {
+	width: 100%;
+	position: relative;
+	z-index: 1;
 }
 
 #topBar {
@@ -15,39 +21,26 @@
 	background-color: orange;
 }
 
-#backdiv {
-	height: 650px;
-	width: 99%;
-	position: absolute;
-	z-index: 1;
-}
-
-#map {
-	height: 100%;
-	width: 100%;
-}
-
-.frontdiv {
-	height: 350px;
-	width: 230px;
-	margin: 20px;
-	position: relative;
-	z-index: 2;
-}
-
-.front_top {
+#header {
 	position: relative;
 	z-index: 10000;
 }
 
-#realgrid {
-	height: 100%;
-	width: 100%;
+#map {
+	height: 650px;
 }
 
-#chartarea {
-	clear: both;
-	width: 100%;
-	position: absolute;
-	z-index: 1;
+#realgrid {
+	height: 235px;
+	width: 230px;
+	margin: 10px;
+}
+
+#detaildiv {
+	width: 99%;
+	height: 45%;
+	top: 100px;
+	margin: auto;
+	border: 1px solid;
+	
 }
