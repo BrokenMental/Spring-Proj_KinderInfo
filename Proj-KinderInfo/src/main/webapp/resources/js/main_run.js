@@ -21,4 +21,11 @@ $(window).scroll(function(){
 });
 //header fix end
 
-
+detv.style.display="none";
+function detailFunc(){
+	if(detv.style.display=="block"){
+		detv.style.display="none";
+	}else{
+		detv.style.display="block";
+	}
+}

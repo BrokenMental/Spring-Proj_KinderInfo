@@ -23,6 +23,7 @@
 		var jdata = ${jdata};
 		var cdata = ${cdata};
 		var crimedata = ${crimedata};
+		var detv = document.getElementById("detaildiv");
 	</script>
 	<!--response data end-->
 
@@ -53,9 +54,5 @@
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
-	
-	<script>
-		document.getElementById("detaildiv").style.display="none";
-	</script>
 </body>
 </html>

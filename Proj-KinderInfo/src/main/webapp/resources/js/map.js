@@ -37,11 +37,24 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 							if (adds[j].match((jdata.kinderInfo[k].addr))) {
 								if (infowindow.getMap()) {
 									infowindow.close();
+									detv.style.display="none"; // 피커 정보창 사라질때 함께 상세정보창도 사라짐
 								} else {
+									 var contStart = [
+										 '<div style="text-align:center;">',
+									     '	<h4>'
+									 ].join('');
+									 var contEnd = [
+									 	 '	</h4>',
+									     '  <p>',
+									     '		<input type="button" value="상세보기" onclick="detailFunc()">',
+									     '  </p>',
+									     '</div>'
+									 ].join('');
 						 		    map.setCenter(marker.position);
 						 		    //map.setZoom(8, true); // 다른 피커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
-									infowindow.setContent(jdata.kinderInfo[k].kindername);
-									infowindow.open(map, marker);
+									infowindow.setContent(contStart + jdata.kinderInfo[k].kindername + contEnd);
+									detv.innerHTML=jdata.kinderInfo[k].kindername; // 피커 선택시 상세정보창에 미리 입력
+						 		    infowindow.open(map, marker);
 									
 								    gridView.setSelectOptions({"style" : "rows"});
 									var current = {};
