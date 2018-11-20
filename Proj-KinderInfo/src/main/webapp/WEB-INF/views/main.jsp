@@ -55,7 +55,7 @@
 	<!-- mapping code end -->
 	
 	<script>
-		//document.getElementById("detaildiv").style.display="none";
+		document.getElementById("detaildiv").style.display="none";
 	</script>
 </body>
 </html>

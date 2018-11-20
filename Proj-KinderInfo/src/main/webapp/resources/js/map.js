@@ -39,7 +39,7 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 									infowindow.close();
 								} else {
 						 		    map.setCenter(marker.position);
-						 		    map.setZoom(8, true);
+						 		    //map.setZoom(8, true); // 다른 피커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
 									infowindow.setContent(jdata.kinderInfo[k].kindername);
 									infowindow.open(map, marker);
 									

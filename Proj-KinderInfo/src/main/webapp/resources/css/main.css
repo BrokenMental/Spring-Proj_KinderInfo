@@ -42,5 +42,6 @@
 	top: 100px;
 	margin: auto;
 	border: 1px solid;
-	
+	background-color: white;
+	z-index: 500;
 }
