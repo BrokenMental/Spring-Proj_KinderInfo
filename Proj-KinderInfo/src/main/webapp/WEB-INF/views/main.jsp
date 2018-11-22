@@ -13,11 +13,12 @@
 	</div>
 	<div class="backdiv" id="map">
 		<div class="frontdiv" id="realgrid"></div>
-		<div class="frontdiv" id="detaildiv"></div>
+		<div class="frontdiv" id="detaildiv">
+			<p id="detailP">Menu</p>
+			<!-- <div id="container"></div> -->
+			<div id="highchart"></div>
+		</div>
 	</div>
-	<h1>지역정보</h1>
-	<div class="backdiv" id="container"></div>
-	<div class="backdiv" id="highchart"></div>
 	<!--response data start-->
 	<script type="text/javascript">
 		var jdata = ${jdata};

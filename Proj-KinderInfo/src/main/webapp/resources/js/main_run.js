@@ -1,7 +1,9 @@
 gridView.onDataCellClicked = function(grid, index) {
 	map.setCenter(markers[index.dataRow].position);
 	map.setZoom(8, true);
-	infowindow.setContent(jdata.kinderInfo[index.dataRow].kindername);
+	infowindow.setContent(contStart + jdata.kinderInfo[index.dataRow].kindername + contEnd);
+	$("#detailP *").remove(); // 기존 append 값 지우기(뒤에 *를 추가해 자식요소만 없앤다.)
+	$("#detailP").append("<b>"+jdata.kinderInfo[index.dataRow].kindername+"</b>"); // 피커 선택시 상세정보창에 미리 입력
 	infowindow.open(map, markers[index.dataRow]);
 };
 
