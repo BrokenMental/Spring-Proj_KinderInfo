@@ -8,47 +8,21 @@
 <title>유치원 정보 검색 사이트</title>
 </head>
 <body>
-	<div id="backdiv">
-		<div class="front_top">
-			<%@include file="include/header.jsp"%>
-		</div>
-		<div id="map">
-			<div class="frontdiv">
-				<div id="realgrid"></div>
-			</div>
-		</div>
-		<div id="chartarea">
-			<h1>지역정보</h1>
-			<div id="container"></div>
-			<div id="highchart"></div>
-		</div>
+	<div class="backdiv" id="header">
+		<%@include file="include/header.jsp"%>
 	</div>
+	<div class="backdiv" id="map">
+		<div class="frontdiv" id="realgrid"></div>
+		<div class="frontdiv" id="detaildiv"></div>
+	</div>
+	<h1>지역정보</h1>
+	<div class="backdiv" id="container"></div>
+	<div class="backdiv" id="highchart"></div>
 	<!--response data start-->
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript">
 		var jdata = ${jdata};
 		var cdata = ${cdata};
 		var crimedata = ${crimedata};
-		
-		$(document).ready(function(){
-
-			var topBar = $("#topBar").offset();
-
-			$(window).scroll(function(){
-				
-				var docScrollY = $(document).scrollTop()
-				var barThis = $("#topBar")
-				var fixNext = $("#frontdiv")
-
-				if( docScrollY > topBar.top ) {
-					barThis.addClass("top_bar_fix");
-					fixNext.addClass("pd_top_80");
-				}else{
-					barThis.removeClass("top_bar_fix");
-					fixNext.removeClass("pd_top_80");
-				}
-			});
-		})
 	</script>
 	<!--response data end-->
 
@@ -79,5 +53,9 @@
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
+	
+	<script>
+		//document.getElementById("detaildiv").style.display="none";
+	</script>
 </body>
 </html>

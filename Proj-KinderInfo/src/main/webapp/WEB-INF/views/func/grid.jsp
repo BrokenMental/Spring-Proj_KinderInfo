@@ -32,6 +32,7 @@
 		gridView = new RealGridJS.GridView("realgrid");
 		gridView.setDataSource(dataProvider);
 		gridView.setPanel({visible:false}); // 상단 그루핑 패널
+		gridView.setFooter({visible: false}); // 하단바
 		gridView.setStateBar({visible: false}); // 숫자 옆 공백
 		gridView.setOptions({
 		    indicator: {zeroBase: false}, // 상태바

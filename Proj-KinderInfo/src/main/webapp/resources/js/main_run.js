@@ -4,3 +4,21 @@ gridView.onDataCellClicked = function(grid, index) {
 	infowindow.setContent(jdata.kinderInfo[index.dataRow].kindername);
 	infowindow.open(map, markers[index.dataRow]);
 };
+
+//header fix start
+var topBar = $("#topBar").offset();
+
+$(window).scroll(function(){
+	
+	var docScrollY = $(document).scrollTop()
+	var barThis = $("#topBar")
+
+	if( docScrollY > topBar.top ) {
+		barThis.addClass("topBar_fix");
+	}else{
+		barThis.removeClass("topBar_fix");
+	}
+});
+//header fix end
+
+

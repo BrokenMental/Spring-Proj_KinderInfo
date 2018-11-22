@@ -9,10 +9,6 @@
 3. Apache Tomcat Ver : 8.0
 4. Database : MariaDB
 
-# 스프링 설정
-1. Pakage & Resource 구성
-2. Database : MariaDB
-
 # 활용 지도 : Naver Map
 1. Naver Map 적용(완료)
 2. 유치원 & 어린이집 OPEN API 활용(진행중)
