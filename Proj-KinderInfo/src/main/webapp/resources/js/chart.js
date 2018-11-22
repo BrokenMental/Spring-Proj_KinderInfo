@@ -1,7 +1,7 @@
 /*-----------
   high chart
 -----------*/
-Highcharts.chart('container', {
+/*Highcharts.chart('container', {
 
 	title : {
 		text : '인천지역별 범죄율, 2010-2017'
@@ -52,7 +52,7 @@ Highcharts.chart('container', {
 		} ]
 	}
 
-});
+});*/
 
 Highcharts.chart('highchart', {
 
