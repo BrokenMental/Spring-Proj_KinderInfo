@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,8 +15,6 @@ import us.inhatc.service.KinderService;
  */
 @Controller
 public class KinderController {
-	
-	//private static final Logger logger = LoggerFactory.getLogger(GridController.class);
 
 	@Inject
 	private KinderService service;
@@ -29,9 +26,6 @@ public class KinderController {
 			
 			JSONObject servicecomb = service.selectchart();
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
-			
-			JSONObject servicecrime = service.selectcrime();
-			model.addAttribute("crimedata",servicecrime.toString().substring(13,servicecrime.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,10 +52,6 @@ public class KinderController {
 		try {
 			model.addAttribute("jdata",service.selectgrid());
 			
-			//JSONObject servicecomb = service.selectgrid();
-			//model.addAttribute("gdata",servicecomb.toString().substring(12,servicecomb.toString().length()-10));
-			//model.addAttribute("gdatasize",servicecomb.toString().substring(servicecomb.toString().length()-2,servicecomb.toString().length()-1));
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,7 +65,6 @@ public class KinderController {
 		
 		try {
 			JSONObject servicecomb = service.selectchart();
-			//System.out.println(servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();

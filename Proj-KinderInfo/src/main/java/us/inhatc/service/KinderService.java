@@ -7,6 +7,5 @@ public interface KinderService {
 	public JSONObject selectgrid()throws Exception;
 	
 	public JSONObject selectchart()throws Exception;
-	
-	public JSONObject selectcrime()throws Exception;
+
 }

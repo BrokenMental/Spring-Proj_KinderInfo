@@ -16,11 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import com.sun.javafx.scene.paint.GradientUtils.Parser;
-
 import us.inhatc.domain.ChartVO;
-import us.inhatc.domain.CrimeVO;
-import us.inhatc.domain.GridVO;
 import us.inhatc.persistence.KinderDAOImpl;
 
 @Service
@@ -43,32 +39,8 @@ public class KinderServiceImpl implements KinderService {
 		JSONParser ps = new JSONParser();
 		JSONObject jobj = (JSONObject)ps.parse(jsdata);
 		
-		/*JSONObject json = new JSONObject();
-		json.put("kinderInfo", (JSONObject)ps.parse(jsdata));
-		System.out.println(json);*/
+		//jobj.get("kinderInfo") //JSONObject 내의 속성 뽑아내는 방법
 		
-		/*
-		 * // 이전에 사용했던 공중화장실 JSON 데이터 변환하기
-		 * JSONArray garray = new JSONArray(); JSONObject gobj = new
-		 * JSONObject();
-		 * 
-		 * ArrayList<?> gvo = (ArrayList<?>)dao.selectgrid(); GridVO gdata =
-		 * null;
-		 * 
-		 * 
-		 * for(int i=0; i<gvo.size(); i++){
-		 * 
-		 * gdata = (GridVO)gvo.get(i); JSONObject gtemp = new JSONObject();
-		 * 
-		 * gtemp.put("field1",gdata.getField1());
-		 * gtemp.put("field2",gdata.getField2());
-		 * gtemp.put("field3",gdata.getField3());
-		 * gtemp.put("field4",gdata.getField4());
-		 * gtemp.put("field5",gdata.getField5());
-		 * 
-		 * garray.add(gtemp); } gobj.put("gridData",garray);
-		 * gobj.put("size",gvo.size());
-		 */
 		return jobj;
 	}
 
@@ -147,93 +119,4 @@ public class KinderServiceImpl implements KinderService {
 		ctemp.put("data", cja);
 		return ctemp;
 	}
-
-	@Override
-	public JSONObject selectcrime() throws Exception {
-		
-		ArrayList<CrimeVO> cjungbu = (ArrayList<CrimeVO>) dao.selectcrimejungbu();
-		ArrayList<CrimeVO> cnambu = (ArrayList<CrimeVO>) dao.selectcrimenambu();
-		ArrayList<CrimeVO> cnamdong = (ArrayList<CrimeVO>) dao.selectcrimenamdong();
-		ArrayList<CrimeVO> cbupheung = (ArrayList<CrimeVO>) dao.selectcrimebupheung();
-		ArrayList<CrimeVO> cseobu = (ArrayList<CrimeVO>) dao.selectcrimeseobu();
-		ArrayList<CrimeVO> cgyeyang = (ArrayList<CrimeVO>) dao.selectcrimegyeyang();
-		ArrayList<CrimeVO> cganghwa = (ArrayList<CrimeVO>) dao.selectcrimeganghwa();
-		ArrayList<CrimeVO> cyunsu = (ArrayList<CrimeVO>) dao.selectcrimeyunsu();
-		ArrayList<CrimeVO> csamsan = (ArrayList<CrimeVO>) dao.selectcrimesamsan();
-		ArrayList<CrimeVO> cnonhyeon = (ArrayList<CrimeVO>) dao.selectcrimenonhyeon();
-		
-		JSONArray carray = new JSONArray();
-		JSONObject cobj = new JSONObject();
-
-		carray.add(forcrime(cjungbu, "a"));
-		carray.add(forcrime(cnambu, "b"));
-		carray.add(forcrime(cnamdong, "c"));
-		carray.add(forcrime(cbupheung, "d"));
-		carray.add(forcrime(cseobu, "e"));
-		carray.add(forcrime(cgyeyang, "f"));
-		carray.add(forcrime(cganghwa, "g"));
-		carray.add(forcrime(cyunsu, "h"));
-		carray.add(forcrime(csamsan, "i"));
-		carray.add(forcrime(cnonhyeon, "j"));
-
-		cobj.put("chartData", carray);
-
-		return cobj;
-	}
-	
-	// JSON 형식의 Chart 변환하기
-		public JSONObject forcrime(ArrayList<CrimeVO> tc, String cstr) {
-			JSONObject ctemp = new JSONObject();
-			JSONArray cja = new JSONArray();
-
-			for (int i = 0; i < tc.size(); i++) {
-				if (i == 0) {
-					if (cstr == "a") {
-						ctemp.put("name", "중부서");
-					} else if (cstr == "b") {
-						ctemp.put("name", "남부서");
-					} else if (cstr == "c") {
-						ctemp.put("name", "남동서");
-					} else if (cstr == "d") {
-						ctemp.put("name", "부평서");
-					} else if (cstr == "e") {
-						ctemp.put("name", "서부서");
-					} else if (cstr == "f") {
-						ctemp.put("name", "계양서");
-					} else if (cstr == "g") {
-						ctemp.put("name", "강화서");
-					} else if (cstr == "h") {
-						ctemp.put("name", "연수서");
-					} else if (cstr == "i") {
-						ctemp.put("name", "삼산서");
-					} else if (cstr == "j") {
-						ctemp.put("name", "논현서");
-					}
-				}
-				
-				if (cstr == "a") {
-					cja.add(tc.get(i).getJungbu());
-				} else if (cstr == "b") {
-					cja.add(tc.get(i).getNambu());
-				} else if (cstr == "c") {
-					cja.add(tc.get(i).getNamdong());
-				} else if (cstr == "d") {
-					cja.add(tc.get(i).getBupheung());
-				} else if (cstr == "e") {
-					cja.add(tc.get(i).getSeobu());
-				} else if (cstr == "f") {
-					cja.add(tc.get(i).getGyeyang());
-				} else if (cstr == "g") {
-					cja.add(tc.get(i).getGanghwa());
-				} else if (cstr == "h") {
-					cja.add(tc.get(i).getYunsu());
-				} else if (cstr == "i") {
-					cja.add(tc.get(i).getSamsan());
-				} else if (cstr == "j") {
-					cja.add(tc.get(i).getNonhyeon());
-				}
-			}
-			ctemp.put("data", cja);
-			return ctemp;
-		}
 }
