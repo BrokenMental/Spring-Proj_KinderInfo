@@ -63,7 +63,13 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 									infowindow.setContent(contStart + jdata.kinderInfo[k].kindername + contEnd);
 									//detv.innerHTML=jdata.kinderInfo[k].kindername; // 기존내용 덮어쓰기 때문에 변경
 									$("#detailP *").remove(); // 기존 append 값 지우기(뒤에 *를 추가해 자식요소만 없앤다.)
-						 		    $("#detailP").append("<b>"+jdata.kinderInfo[k].kindername+"</b>"); // 피커 선택시 상세정보창에 미리 입력
+									
+									// 피커 선택시 상세정보창에 미리 입력
+						 		    $("#detailP").append("<b> 유치원 명 : " + jdata.kinderInfo[k].kindername
+						 		    		+ " " + jdata.kinderInfo[k].establish
+						 		    		+ " | 오픈시간 : " + jdata.kinderInfo[k].opertime
+						 		    		+ "<br>주소 : " + jdata.kinderInfo[k].addr
+						 		    		+ " | 연락처 : " + jdata.kinderInfo[k].telno) + "</b>";
 									infowindow.open(map, marker);
 									
 								    gridView.setSelectOptions({"style" : "rows"});

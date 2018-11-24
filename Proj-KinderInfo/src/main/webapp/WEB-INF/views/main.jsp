@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유치원 정보 검색 사이트</title>
+<title>아이키우기 좋은동네</title>
 <link rel="shortcut icon" href="resources/img/baby.png">
 </head>
 <body>
@@ -15,7 +15,7 @@
 	<div class="backdiv" id="map">
 		<div class="frontdiv" id="realgrid"></div>
 		<div class="frontdiv" id="detaildiv">
-			<p id="detailP">Menu</p>
+			<p id="detailP"></p>
 			<!-- <div id="container"></div> -->
 			<div id="highchart"></div>
 		</div>
