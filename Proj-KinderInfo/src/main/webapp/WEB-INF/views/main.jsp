@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유치원 정보 검색 사이트</title>
+<link rel="shortcut icon" href="resources/img/baby.png">
 </head>
 <body>
 	<div class="backdiv" id="header">
@@ -23,7 +24,6 @@
 	<script type="text/javascript">
 		var jdata = ${jdata};
 		var cdata = ${cdata};
-		var crimedata = ${crimedata};
 		var detv = document.getElementById("detaildiv");
 	</script>
 	<!--response data end-->
