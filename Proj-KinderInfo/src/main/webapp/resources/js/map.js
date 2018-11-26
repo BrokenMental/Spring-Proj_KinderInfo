@@ -60,7 +60,7 @@ for (var i = 0; i < jdata.kinderInfo.length; i++) {
 								} else {
 						 		    map.setCenter(marker.position);
 						 		    //map.setZoom(8, true); // 다른 피커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
-									infowindow.setContent(contStart + jdata.kinderInfo[k].kindername + contEnd);
+									infowindow.setContent(contStart + jdata.kinderInfo[k].kindername + jdata.kinderInfo[k].establish + contEnd);
 									//detv.innerHTML=jdata.kinderInfo[k].kindername; // 기존내용 덮어쓰기 때문에 변경
 									$("#detailP *").remove(); // 기존 append 값 지우기(뒤에 *를 추가해 자식요소만 없앤다.)
 									
