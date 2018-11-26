@@ -22,6 +22,8 @@
 <script src="resources/exporting.js"></script>
 <script src="resources/export-data.js"></script>
 <script type="text/javascript">
+	var cdata = ${cdata};
+	console.log(cdata);
 	Highcharts.chart('container', {
 
 		title : {
@@ -52,7 +54,7 @@
 			}
 		},
 
-		series : ${cdata},
+		series : cdata,
 
 		responsive : {
 			rules : [ {

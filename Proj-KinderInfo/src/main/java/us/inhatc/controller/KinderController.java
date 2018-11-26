@@ -64,7 +64,8 @@ public class KinderController {
 		
 		
 		try {
-			JSONObject servicecomb = service.selectchart();
+			//JSONObject servicecomb = service.selectchart();
+			JSONObject servicecomb = service.selectchart_cin();
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();

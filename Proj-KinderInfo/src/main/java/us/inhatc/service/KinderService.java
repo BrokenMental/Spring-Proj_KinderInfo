@@ -8,4 +8,5 @@ public interface KinderService {
 	
 	public JSONObject selectchart()throws Exception;
 
+	public JSONObject selectchart_cin()throws Exception;
 }

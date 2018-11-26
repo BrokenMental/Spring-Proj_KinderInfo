@@ -17,6 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import us.inhatc.domain.ChartVO;
+import us.inhatc.domain.Chart_cinVO;
 import us.inhatc.persistence.KinderDAOImpl;
 
 @Service
@@ -60,10 +61,39 @@ public class KinderServiceImpl implements KinderService {
 		carray.add(forchart(cvoe, "e"));
 
 		cobj.put("chartData", carray);
+		System.out.println("cobj : "+cobj);
+		
 
 		return cobj;
 	}
 
+
+	@Override
+	public JSONObject selectchart_cin() throws Exception {
+		ArrayList<Chart_cinVO> cin = (ArrayList<Chart_cinVO>) dao.selectchartcin();
+
+		JSONObject cobj = new JSONObject();
+
+		cutyear(cin);
+		
+		cobj.put("chartData", cin);
+
+		return cobj;
+	}
+	
+	public String cutyear(ArrayList<Chart_cinVO> cstr) throws IOException {
+
+		JSONObject yobj = new JSONObject();
+		for(int i=0; i<cstr.size(); i++){
+			//System.out.println("value : "+cstr.get(i).toString().substring(13,cstr.get(i).toString().length()-1));
+			//System.out.println("length : "+cstr.get(i).toString().length());
+			yobj.put(i, cstr.get(i).toString().substring(13,cstr.get(i).toString().length()-1));
+			System.out.println("yobj : "+yobj);
+		}
+		return null;
+	}
+	
+	
 	// 참조 : https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
 	// http JSON 페이지 가져오기
 	private String readAll(Reader rd) throws IOException {

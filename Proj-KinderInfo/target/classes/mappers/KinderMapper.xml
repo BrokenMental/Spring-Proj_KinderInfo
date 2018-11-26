@@ -24,4 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT etc
 		FROM chartd
 	</select>
+	<select id="selectchartcin" resultType="us.inhatc.domain.Chart_cinVO">
+		SELECT *
+		FROM cin
+	</select>
 </mapper>
