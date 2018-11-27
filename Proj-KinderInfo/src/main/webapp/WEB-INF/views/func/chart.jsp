@@ -23,20 +23,22 @@
 <script src="resources/export-data.js"></script>
 <script type="text/javascript">
 	var cdata = ${cdata};
-	console.log(cdata);
+	//console.log(cdata);
 	Highcharts.chart('container', {
 
 		title : {
-			text : 'Solar Employment Growth by Sector, 2010-2016'
+			text : '인천 인구 유입률 2014-2018'
 		},
 
 		subtitle : {
-			text : 'Source: thesolarfoundation.com'
+			text : 'Source: 공공데이터 포털'
 		},
 
 		yAxis : {
+	        floor: 0, // y축 최소값
+	        ceiling: 40000, // y축 최대값
 			title : {
-				text : 'Number of Employees'
+				text : 'Year'
 			}
 		},
 		legend : {
@@ -50,7 +52,7 @@
 				label : {
 					connectorAllowed : false
 				},
-				pointStart : 2010
+				pointStart : 2014
 			}
 		},
 

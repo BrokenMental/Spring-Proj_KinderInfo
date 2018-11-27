@@ -1,5 +1,7 @@
 package us.inhatc.domain;
 
+import net.sf.json.JSONObject;
+
 public class Chart_cinVO {
 	private String year;
 	private int seoul;
@@ -131,5 +133,15 @@ public class Chart_cinVO {
 				+ jeju + "]";
 	}
 	
-	
+	public JSONObject toJson() {
+		JSONObject jobj = new JSONObject();
+		String Chart_cinVO = "[\"year\":" + year + ",\"seoul\":" + seoul + ",\"busan\":" + busan + ",\"daegu\":" + daegu + ",\"gwangju\":"
+				+ gwangju + ",\"daejeon\":" + daejeon + ",\"ulsan\":" + ulsan + ",\"sejong\":" + sejong + ",\"gyeonggi\":"
+				+ gyeonggi + ",\"gangwon\":" + gangwon + ",\"chungbuk\":" + chungbuk + ",\"chungnam\":" + chungnam + ",\"jeonbuk\":"
+				+ jeonbuk + ",\"jeonnam\":" + jeonnam + ",\"gyeongbuk\":" + gyeongbuk + ",\"gyeongnam\":" + gyeongnam + ",\"jeju\":"
+				+ jeju + "]";
+		jobj.put("Chart_cinVO",Chart_cinVO);
+		
+		return jobj;
+	}
 }
