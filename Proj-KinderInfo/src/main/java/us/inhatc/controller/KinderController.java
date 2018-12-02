@@ -76,7 +76,7 @@ public class KinderController {
 		try {
 			//JSONObject servicecomb = service.selectchart();
 			JSONObject servicecomb = service.selectchart_cin();
-			model.addAttribute("cdata",servicecomb.toString().substring(9,servicecomb.toString().length()-1));
+			//model.addAttribute("cdata",servicecomb.toString().substring(9,servicecomb.toString().length()-1));
 			
 			/*
 			Map<String,Object> servicecomb = service.selectchart_cin();

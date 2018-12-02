@@ -1,6 +1,7 @@
 package us.inhatc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -36,8 +37,8 @@ public class KinderDAOImpl{
 		return session.selectList(namespace + ".selectchartetc");
 	}
 
-	public List<Chart_cinVO> selectchartcin() throws Exception {
-		return session.selectList(namespace + ".selectchartcin");
+	public List<Chart_cinVO> selectcinm() throws Exception {
+		return session.selectList(namespace + ".selectcinm");
 	}
 	
 	public List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception {

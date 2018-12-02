@@ -1,6 +1,12 @@
 package us.inhatc.domain;
 
-import net.sf.json.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import net.sf.json.JSONArray;
+
+
 
 public class Chart_cinVO {
 	private String year;
@@ -133,15 +139,56 @@ public class Chart_cinVO {
 				+ jeju + "]";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public JSONObject toJson() {
-		JSONObject jobj = new JSONObject();
-		String Chart_cinVO = "[\"year\":" + year + ",\"seoul\":" + seoul + ",\"busan\":" + busan + ",\"daegu\":" + daegu + ",\"gwangju\":"
-				+ gwangju + ",\"daejeon\":" + daejeon + ",\"ulsan\":" + ulsan + ",\"sejong\":" + sejong + ",\"gyeonggi\":"
-				+ gyeonggi + ",\"gangwon\":" + gangwon + ",\"chungbuk\":" + chungbuk + ",\"chungnam\":" + chungnam + ",\"jeonbuk\":"
-				+ jeonbuk + ",\"jeonnam\":" + jeonnam + ",\"gyeongbuk\":" + gyeongbuk + ",\"gyeongnam\":" + gyeongnam + ",\"jeju\":"
-				+ jeju + "]";
-		jobj.put("Chart_cinVO",Chart_cinVO);
+		JSONObject jObj = new JSONObject();
 		
-		return jobj;
+		jObj.put("year",year);
+		jObj.put("seoul",seoul);
+		jObj.put("busan",busan);
+		jObj.put("daegu",daegu);
+		jObj.put("daegu",daegu);
+		jObj.put("gwangju",gwangju);
+		jObj.put("daejeon",daejeon);
+		jObj.put("ulsan",ulsan);
+		jObj.put("sejong",sejong);
+		jObj.put("gyeonggi",gyeonggi);
+		jObj.put("gangwon",gangwon);
+		jObj.put("chungbuk",chungbuk);
+		jObj.put("chungnam",chungnam);
+		jObj.put("jeonbuk",jeonbuk);
+		jObj.put("jeonnam",jeonnam);
+		jObj.put("gyeongbuk",gyeongbuk);
+		jObj.put("gyeongnam",gyeongnam);
+		jObj.put("jeju",jeju);
+		
+		return jObj;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public JSONObject toJsonN() {
+		JSONObject jObj = new JSONObject();
+		
+		jObj.put(0,year);
+		jObj.put(1,seoul);
+		jObj.put(2,busan);
+		jObj.put(3,daegu);
+		jObj.put(4,daegu);
+		jObj.put(5,gwangju);
+		jObj.put(6,daejeon);
+		jObj.put(7,ulsan);
+		jObj.put(8,sejong);
+		jObj.put(9,gyeonggi);
+		jObj.put(10,gangwon);
+		jObj.put(11,chungbuk);
+		jObj.put(12,chungnam);
+		jObj.put(13,jeonbuk);
+		jObj.put(14,jeonnam);
+		jObj.put(15,gyeongbuk);
+		jObj.put(16,gyeongnam);
+		jObj.put(17,jeju);
+		
+		return jObj;
 	}
 }

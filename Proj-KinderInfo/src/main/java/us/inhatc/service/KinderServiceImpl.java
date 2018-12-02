@@ -8,7 +8,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -66,7 +68,6 @@ public class KinderServiceImpl implements KinderService {
 		carray.add(forchart(cvoe, "e"));
 
 		cobj.put("chartData", carray);
-		System.out.println("cobj : " + cobj);
 
 		return cobj;
 	}
@@ -74,10 +75,23 @@ public class KinderServiceImpl implements KinderService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject selectchart_cin() throws Exception {
-		//int year[] = {2014,2015,2016,2017,2018};
 		String doname[] = { "seoul", "busan", "daegu", "gwangju", "daejeon", "ulsan", "sejong", "gyeonggi", "gangwon",
 				"chungbuk", "chungnam", "jeonbuk", "jeonnam", "gyeongbuk", "gyeongnam", "jeju" };
 
+		JSONObject resultJ = new JSONObject();
+		List<Chart_cinVO> cl = dao.selectcinm();
+		
+		for(int i=0; i<cl.size(); i++){
+			// 마지막 index를 찾아서 for문 돌리고
+			// for문에서 json array[]에 add,
+			// 순서에 맞는 doname String을 찾아서 put
+			// 그런데, csv파일의 컬럼이 도명 | 2016 | 2017 ~ 데이터라면??? 오...
+			System.out.println(cl.get(i).toJsonN().get(i));
+		}
+		
+		//System.out.println("JSON DATA => "+resultJ);
+		
+		/*
 		JSONObject resultJ = new JSONObject();
 		JSONArray resultA = new JSONArray();
 		List<Chart_cinVO> cin = dao.selectchartcin();
@@ -129,8 +143,8 @@ public class KinderServiceImpl implements KinderService {
 			}
 		}
 		resultJ.put("chart", resultA);
-
-		return resultJ;
+*/
+		return null;
 	}
 
 	/*
