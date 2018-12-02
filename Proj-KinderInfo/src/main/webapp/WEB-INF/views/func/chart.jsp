@@ -34,6 +34,14 @@
 			text : 'Source: 공공데이터 포털'
 		},
 
+		xAxis : {
+			categories: [2014, 2015, 2016, 2017, 2018],
+	        //minRange: 3, // 데이터를 중심으로 총 몇개의 x 데이터를 표현할것인지 설정
+        	gridLineWidth: 1, // 라인 굵기
+        	gridZIndex: 4, // 구분선과 차트간의 거리
+            //offset: 10 // 0의 y.bottom margin
+		},
+		
 		yAxis : {
 	        floor: 0, // y축 최소값
 	        ceiling: 7000, // y축 최대값
@@ -52,7 +60,7 @@
 				label : {
 					connectorAllowed : false
 				},
-				pointStart : 2014
+				pointStart : 2014 // 시작지점, 시작지점이 정해져있으면 xAxis를 무시한다.
 			}
 		},
 
