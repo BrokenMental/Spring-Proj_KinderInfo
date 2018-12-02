@@ -15,4 +15,5 @@ public interface KinderService {
 	List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception;
 	List<SidoVO> selectSigunguName(SidoVO sidoVO) throws Exception;
 
+	public JSONObject selectchart_cin()throws Exception;
 }

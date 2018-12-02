@@ -25,6 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM chartd
 	</select>
 	
+	<select id="selectchartcin" resultType="us.inhatc.domain.Chart_cinVO">
+		SELECT *
+		FROM cin
+	</select>
+	
 	<select id="selectSidoName" resultType="us.inhatc.domain.SidoVO">
 		SELECT sidoName
 		FROM sido_code

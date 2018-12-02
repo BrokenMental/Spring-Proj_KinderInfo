@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import us.inhatc.domain.ChartVO;
+import us.inhatc.domain.Chart_cinVO;
 import us.inhatc.domain.GridVO;
 import us.inhatc.domain.SidoVO;
 
@@ -33,6 +34,10 @@ public class KinderDAOImpl{
 	}
 	public List<ChartVO> selectchartetc() throws Exception {
 		return session.selectList(namespace + ".selectchartetc");
+	}
+
+	public List<Chart_cinVO> selectchartcin() throws Exception {
+		return session.selectList(namespace + ".selectchartcin");
 	}
 	
 	public List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception {
