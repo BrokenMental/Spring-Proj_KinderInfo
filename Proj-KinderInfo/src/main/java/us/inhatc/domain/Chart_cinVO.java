@@ -1,12 +1,6 @@
 package us.inhatc.domain;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import net.sf.json.JSONArray;
-
-
 
 public class Chart_cinVO {
 	private String year;
@@ -174,20 +168,19 @@ public class Chart_cinVO {
 		jObj.put(1,seoul);
 		jObj.put(2,busan);
 		jObj.put(3,daegu);
-		jObj.put(4,daegu);
-		jObj.put(5,gwangju);
-		jObj.put(6,daejeon);
-		jObj.put(7,ulsan);
-		jObj.put(8,sejong);
-		jObj.put(9,gyeonggi);
-		jObj.put(10,gangwon);
-		jObj.put(11,chungbuk);
-		jObj.put(12,chungnam);
-		jObj.put(13,jeonbuk);
-		jObj.put(14,jeonnam);
-		jObj.put(15,gyeongbuk);
-		jObj.put(16,gyeongnam);
-		jObj.put(17,jeju);
+		jObj.put(4,gwangju);
+		jObj.put(5,daejeon);
+		jObj.put(6,ulsan);
+		jObj.put(7,sejong);
+		jObj.put(8,gyeonggi);
+		jObj.put(9,gangwon);
+		jObj.put(10,chungbuk);
+		jObj.put(11,chungnam);
+		jObj.put(12,jeonbuk);
+		jObj.put(13,jeonnam);
+		jObj.put(14,gyeongbuk);
+		jObj.put(15,gyeongnam);
+		jObj.put(16,jeju);
 		
 		return jObj;
 	}

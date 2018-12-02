@@ -35,6 +35,7 @@ public class KinderController {
 			model.addAttribute("jdata",service.selectgrid());
 			
 			JSONObject servicecomb = service.selectchart();
+			System.out.println(servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,7 +77,8 @@ public class KinderController {
 		try {
 			//JSONObject servicecomb = service.selectchart();
 			JSONObject servicecomb = service.selectchart_cin();
-			//model.addAttribute("cdata",servicecomb.toString().substring(9,servicecomb.toString().length()-1));
+			//System.out.println(servicecomb.toString().substring(10,servicecomb.toString().length()-1));
+			model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.toString().length()-1));
 			
 			/*
 			Map<String,Object> servicecomb = service.selectchart_cin();
@@ -98,7 +100,7 @@ public class KinderController {
 //    	ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
 //    	model.put("selectSigunguName", selectSigunguName);
     	
-//    	System.out.println("¿©±â¾ß ¿©±â! : "+selectSidoName.toString());
+//    	System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½! : "+selectSidoName.toString());
 		
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("func/area");

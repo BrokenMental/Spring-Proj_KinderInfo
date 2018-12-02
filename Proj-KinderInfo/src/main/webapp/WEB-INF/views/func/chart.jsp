@@ -10,7 +10,7 @@
 	min-width: 310px;
 	max-width: 800px;
 	height: 400px;
-	margin: 0 auto
+	margin: 0 auto;
 }
 </style>
 </head>
@@ -36,7 +36,7 @@
 
 		yAxis : {
 	        floor: 0, // y축 최소값
-	        ceiling: 40000, // y축 최대값
+	        ceiling: 7000, // y축 최대값
 			title : {
 				text : 'Year'
 			}

@@ -72,94 +72,42 @@ public class KinderServiceImpl implements KinderService {
 		return cobj;
 	}
 
+	// JSON 데이터를 받아와서 전달하는 메서드
 	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject selectchart_cin() throws Exception {
-		String doname[] = { "seoul", "busan", "daegu", "gwangju", "daejeon", "ulsan", "sejong", "gyeonggi", "gangwon",
+		final String doname[] = { "seoul", "busan", "daegu", "gwangju", "daejeon", "ulsan", "sejong", "gyeonggi", "gangwon",
 				"chungbuk", "chungnam", "jeonbuk", "jeonnam", "gyeongbuk", "gyeongnam", "jeju" };
-
+		/*
+		* JSONArray의 행렬 선언은 사용불가
+		* JSONArray[] tempA = new JSONArray[doname.length];
+		*/
+		
 		JSONObject resultJ = new JSONObject();
+		JSONObject tempO = new JSONObject();
+		Map<String,Integer> tempM = new HashMap<String,Integer>();
 		List<Chart_cinVO> cl = dao.selectcinm();
 		
+		// doname.length는 index 0부터 총 16개, cl.size()는 index 1부터 총 5개
 		for(int i=0; i<cl.size(); i++){
-			// 마지막 index를 찾아서 for문 돌리고
-			// for문에서 json array[]에 add,
-			// 순서에 맞는 doname String을 찾아서 put
-			// 그런데, csv파일의 컬럼이 도명 | 2016 | 2017 ~ 데이터라면??? 오...
-			System.out.println(cl.get(i).toJsonN().get(i));
-		}
-		
-		//System.out.println("JSON DATA => "+resultJ);
-		
-		/*
-		JSONObject resultJ = new JSONObject();
-		JSONArray resultA = new JSONArray();
-		List<Chart_cinVO> cin = dao.selectchartcin();
-		
-		for(int i=0; i<doname.length; i++){
-			JSONObject jo = new JSONObject();
-			JSONArray ja = new JSONArray();
-			int j=1;
-			for(Chart_cinVO voL : cin){
-				if(i==0){
-					ja.add(voL.getSeoul());
-				}else if(i==1){
-					ja.add(voL.getBusan());
-				}else if(i==2){
-					ja.add(voL.getDaegu());
-				}else if(i==3){
-					ja.add(voL.getGwangju());
-				}else if(i==4){
-					ja.add(voL.getDaejeon());
-				}else if(i==5){
-					ja.add(voL.getUlsan());
-				}else if(i==6){
-					ja.add(voL.getSejong());
-				}else if(i==7){
-					ja.add(voL.getGyeonggi());
-				}else if(i==8){
-					ja.add(voL.getGangwon());
-				}else if(i==9){
-					ja.add(voL.getChungbuk());
-				}else if(i==10){
-					ja.add(voL.getChungnam());
-				}else if(i==11){
-					ja.add(voL.getJeonbuk());
-				}else if(i==12){
-					ja.add(voL.getJeonnam());
-				}else if(i==13){
-					ja.add(voL.getGyeongbuk());
-				}else if(i==14){
-					ja.add(voL.getGyeongnam());
-				}else if(i==15){
-					ja.add(voL.getJeju());
+			JSONArray tempA = new JSONArray();
+			
+			for(int j=1; j<=doname.length; j++){
+				tempM.put((i)+"data"+(j-1), Integer.parseInt((cl.get(i).toJsonN().get(j)).toString()));
+				if(i==cl.size()-1){
+					JSONArray tempJ = new JSONArray();
+					for(int k=0; k<cl.size(); k++){
+						tempJ.add(tempM.get((k)+"data"+(j-1)));
+					}
+					tempO.put("data", tempJ);
+					tempO.put("name", doname[j-1]);
+					tempA.add(tempO);
 				}
-				if(j == cin.size()){
-					jo.put("name", doname[i]);
-					jo.put("data", ja);
-					resultA.add(jo);
-				}
-				j++;
 			}
+			resultJ.put("chartD", tempA);
 		}
-		resultJ.put("chart", resultA);
-*/
-		return null;
+		return resultJ;
 	}
-
-	/*
-	 * @SuppressWarnings("unchecked") // 컴파일러의 지양 경고를 무시하는 어노테이션 public
-	 * JSONObject castJson(List<Chart_cinVO> cstr) throws IOException {
-	 * 
-	 * JSONObject jo = new JSONObject(); JSONArray ja =
-	 * JSONArray.fromObject(cstr); jo.put("chart", ja); // json의 경우 "chart" : 로
-	 * 시작
-	 * 
-	 * //Map <String, Object> resultM = new HashMap<String, Object>();
-	 * //resultM.put("chart", ja); // Map의 경우 chart = 로 시작
-	 * 
-	 * return jo; }
-	 */
 
 	// 참조 :
 	// https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
