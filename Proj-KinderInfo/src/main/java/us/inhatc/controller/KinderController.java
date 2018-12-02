@@ -118,7 +118,7 @@ public class KinderController {
         
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<selectSigunguName.size(); i++) {
-        	jsonArray.add(selectSigunguName.get(i));
+        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
         }
         
         PrintWriter pw = res.getWriter();
