@@ -20,9 +20,6 @@ import net.sf.json.JSONArray;
 import us.inhatc.domain.SidoVO;
 import us.inhatc.service.KinderService;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class KinderController {
 
@@ -75,15 +72,9 @@ public class KinderController {
 		
 		
 		try {
-			//JSONObject servicecomb = service.selectchart();
 			JSONObject servicecomb = service.selectchart_cin();
-			//System.out.println(servicecomb.toString().substring(10,servicecomb.toString().length()-1));
 			model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.toString().length()-1));
 			
-			/*
-			Map<String,Object> servicecomb = service.selectchart_cin();
-			model.addAttribute("cdata",servicecomb);
-			*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,8 +90,6 @@ public class KinderController {
     	
 //    	ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
 //    	model.put("selectSigunguName", selectSigunguName);
-    	
-//    	System.out.println("����� ����! : "+selectSidoName.toString());
 		
     	ModelAndView mav = new ModelAndView();
     	mav.setViewName("func/area");
@@ -120,7 +109,7 @@ public class KinderController {
         
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<selectSigunguName.size(); i++) {
-        	jsonArray.add(selectSigunguName.get(i));
+        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
         }
         
         PrintWriter pw = res.getWriter();
