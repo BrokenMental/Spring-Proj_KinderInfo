@@ -24,4 +24,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT etc
 		FROM chartd
 	</select>
+	
+	<select id="selectSidoName" resultType="us.inhatc.domain.SidoVO">
+		SELECT sidoName
+		FROM sido_code
+	</select>
+	<select id="selectSigunguName" resultType="us.inhatc.domain.SidoVO">
+		select sigunguName
+		from sigungu_code
+		where sigunguCode like concat((select sidoCode from sido_code where sidoName = #{sidoName}),'%');
+	</select>
 </mapper>

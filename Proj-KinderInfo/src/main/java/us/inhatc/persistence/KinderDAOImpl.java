@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import us.inhatc.domain.ChartVO;
 import us.inhatc.domain.GridVO;
+import us.inhatc.domain.SidoVO;
 
 @Repository
 public class KinderDAOImpl{
@@ -34,4 +35,10 @@ public class KinderDAOImpl{
 		return session.selectList(namespace + ".selectchartetc");
 	}
 	
+	public List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception {
+		return session.selectList(namespace + ".selectSidoName");
+	}
+	public List<SidoVO> selectSigunguName(SidoVO sidoVO) throws Exception {
+		return session.selectList(namespace + ".selectSigunguName", sidoVO.getSidoName());
+	}
 }

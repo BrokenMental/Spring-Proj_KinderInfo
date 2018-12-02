@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import us.inhatc.domain.ChartVO;
+import us.inhatc.domain.SidoVO;
 import us.inhatc.persistence.KinderDAOImpl;
 
 @Service
@@ -118,5 +120,17 @@ public class KinderServiceImpl implements KinderService {
 		}
 		ctemp.put("data", cja);
 		return ctemp;
+	}
+	
+	@Override
+	public List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSidoName(sidoVO);
+	}
+
+	@Override
+	public List<SidoVO> selectSigunguName(SidoVO sidoVO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSigunguName(sidoVO);
 	}
 }
