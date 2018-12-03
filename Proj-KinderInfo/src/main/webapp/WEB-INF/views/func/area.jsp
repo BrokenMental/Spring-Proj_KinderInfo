@@ -20,7 +20,19 @@ function change_sel(sidoName) {
 		dataType:"json",
 		data: {param:sidoName},
 		success: function(result){
-			console.log(result);   
+			console.log(result);
+			$("#sigunguName").find("option").remove().end().append("<option value='all'>-선택-</option>");
+			
+			$.each(result, function(i) {
+				console.log(result[i]);
+				$("#sigunguName").append("<option value='"+result[i]+"'>"+result[i]+"</option>");
+			});
+			
+			/* for(var count = 0; count < result.size(); count++){                
+            	var option = $("<option>"+result[count]+"</option>");
+            	console.log(count);
+                $('#sigunguName').append(option);
+            } */
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert("오류가 발생하였습니다.");
@@ -44,13 +56,8 @@ function change_sel(sidoName) {
 			</select>
 			</td>
 			<td>
-			<select name="sigunguName" onchange="">
-				<option>-선택-</option>
-				<%-- <c:if test="${!empty selectSigunguName }">
-					<c:forEach var="cd" items="${selectSigunguName }" varStatus="i">
-						<option value="${cd.sigunguName }"<c:if test="${cd.sigunguName eq sigunguName }">selected</c:if>>${cd.sigunguName}</option>
-					</c:forEach>
-				</c:if> --%>
+			<select id="sigunguName" name="sigunguName">
+				<option value='all'>-선택-</option>
 			</select>
 			</td>
 		</tr>
