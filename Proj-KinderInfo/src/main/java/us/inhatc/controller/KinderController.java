@@ -117,18 +117,4 @@ public class KinderController {
         pw.flush();
         pw.close();
 	}
-	
-//	@RequestMapping(value = "/changeSel")
-//	public ModelAndView selectBook(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletRequest request, String param) throws Exception{
-//		
-//		String sidoName = param;
-//		SidoVO.setSidoName(sidoName);
-//		
-//    	ModelAndView mav = new ModelAndView();
-//    	mav.setViewName("book/home");
-//    	
-//        System.out.println(sidoName);
-//        
-//        return mav;
-//	}
 }
