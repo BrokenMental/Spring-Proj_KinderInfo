@@ -8,19 +8,20 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import com.sun.javafx.scene.paint.GradientUtils.Parser;
-
+import net.sf.json.JSONArray;
 import us.inhatc.domain.ChartVO;
-import us.inhatc.domain.CrimeVO;
-import us.inhatc.domain.GridVO;
+import us.inhatc.domain.SidoVO;
+import us.inhatc.domain.Chart_cinVO;
 import us.inhatc.persistence.KinderDAOImpl;
 
 @Service
@@ -35,43 +36,22 @@ public class KinderServiceImpl implements KinderService {
 		// JSON형식의 페이지 URL
 		String jsdata = readJsonFromUrl(
 				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28177");
-		jsdata = jsdata +","+ readJsonFromUrl(
+		jsdata = jsdata + "," + readJsonFromUrl(
 				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28185");
-		jsdata = "{\"kinderInfo\":["+jsdata +"," + readJsonFromUrl(
-				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28110")+"]}";
+		jsdata = "{\"kinderInfo\":[" + jsdata + ","
+				+ readJsonFromUrl(
+						"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode=28&sggCode=28110")
+				+ "]}";
 
 		JSONParser ps = new JSONParser();
-		JSONObject jobj = (JSONObject)ps.parse(jsdata);
-		
-		/*JSONObject json = new JSONObject();
-		json.put("kinderInfo", (JSONObject)ps.parse(jsdata));
-		System.out.println(json);*/
-		
-		/*
-		 * // 이전에 사용했던 공중화장실 JSON 데이터 변환하기
-		 * JSONArray garray = new JSONArray(); JSONObject gobj = new
-		 * JSONObject();
-		 * 
-		 * ArrayList<?> gvo = (ArrayList<?>)dao.selectgrid(); GridVO gdata =
-		 * null;
-		 * 
-		 * 
-		 * for(int i=0; i<gvo.size(); i++){
-		 * 
-		 * gdata = (GridVO)gvo.get(i); JSONObject gtemp = new JSONObject();
-		 * 
-		 * gtemp.put("field1",gdata.getField1());
-		 * gtemp.put("field2",gdata.getField2());
-		 * gtemp.put("field3",gdata.getField3());
-		 * gtemp.put("field4",gdata.getField4());
-		 * gtemp.put("field5",gdata.getField5());
-		 * 
-		 * garray.add(gtemp); } gobj.put("gridData",garray);
-		 * gobj.put("size",gvo.size());
-		 */
+		JSONObject jobj = (JSONObject) ps.parse(jsdata);
+
+		// jobj.get("kinderInfo") //JSONObject 내의 속성 뽑아내는 방법
+
 		return jobj;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject selectchart() throws Exception {
 		ArrayList<ChartVO> cvos = (ArrayList<ChartVO>) dao.selectchartsolo();
@@ -92,7 +72,45 @@ public class KinderServiceImpl implements KinderService {
 		return cobj;
 	}
 
-	// 참조 : https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
+	// JSON 데이터를 받아와서 전달하는 메서드
+	@SuppressWarnings("unchecked")
+	@Override
+	public JSONObject selectchart_cin() throws Exception {
+		final String doname[] = { "seoul", "busan", "daegu", "gwangju", "daejeon", "ulsan", "sejong", "gyeonggi", "gangwon",
+				"chungbuk", "chungnam", "jeonbuk", "jeonnam", "gyeongbuk", "gyeongnam", "jeju" };
+		/*
+		* JSONArray의 행렬 선언은 사용불가
+		* JSONArray[] tempA = new JSONArray[doname.length];
+		*/
+		
+		JSONObject resultJ = new JSONObject();
+		JSONObject tempO = new JSONObject();
+		Map<String,Integer> tempM = new HashMap<String,Integer>();
+		List<Chart_cinVO> cl = dao.selectcinm();
+		
+		// doname.length는 index 0부터 총 16개, cl.size()는 index 1부터 총 5개
+		for(int i=0; i<cl.size(); i++){
+			JSONArray tempA = new JSONArray();
+			
+			for(int j=1; j<=doname.length; j++){
+				tempM.put((i)+"data"+(j-1), Integer.parseInt((cl.get(i).toJsonN().get(j)).toString()));
+				if(i==cl.size()-1){
+					JSONArray tempJ = new JSONArray();
+					for(int k=0; k<cl.size(); k++){
+						tempJ.add(tempM.get((k)+"data"+(j-1)));
+					}
+					tempO.put("data", tempJ);
+					tempO.put("name", doname[j-1]);
+					tempA.add(tempO);
+				}
+			}
+			resultJ.put("chartD", tempA);
+		}
+		return resultJ;
+	}
+
+	// 참조 :
+	// https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
 	// http JSON 페이지 가져오기
 	private String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -109,7 +127,7 @@ public class KinderServiceImpl implements KinderService {
 		try {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
-			jsonText = jsonText.substring(jsonText.indexOf('[')+1, jsonText.length() - 2);
+			jsonText = jsonText.substring(jsonText.indexOf('[') + 1, jsonText.length() - 2);
 			return jsonText;
 		} finally {
 			is.close();
@@ -117,6 +135,7 @@ public class KinderServiceImpl implements KinderService {
 	}
 
 	// JSON 형식의 Chart 변환하기
+	@SuppressWarnings("unchecked")
 	public JSONObject forchart(ArrayList<ChartVO> tc, String cstr) {
 		JSONObject ctemp = new JSONObject();
 		JSONArray cja = new JSONArray();
@@ -147,93 +166,16 @@ public class KinderServiceImpl implements KinderService {
 		ctemp.put("data", cja);
 		return ctemp;
 	}
+	
+	@Override
+	public List<SidoVO> selectSidoName(SidoVO sidoVO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSidoName(sidoVO);
+	}
 
 	@Override
-	public JSONObject selectcrime() throws Exception {
-		
-		ArrayList<CrimeVO> cjungbu = (ArrayList<CrimeVO>) dao.selectcrimejungbu();
-		ArrayList<CrimeVO> cnambu = (ArrayList<CrimeVO>) dao.selectcrimenambu();
-		ArrayList<CrimeVO> cnamdong = (ArrayList<CrimeVO>) dao.selectcrimenamdong();
-		ArrayList<CrimeVO> cbupheung = (ArrayList<CrimeVO>) dao.selectcrimebupheung();
-		ArrayList<CrimeVO> cseobu = (ArrayList<CrimeVO>) dao.selectcrimeseobu();
-		ArrayList<CrimeVO> cgyeyang = (ArrayList<CrimeVO>) dao.selectcrimegyeyang();
-		ArrayList<CrimeVO> cganghwa = (ArrayList<CrimeVO>) dao.selectcrimeganghwa();
-		ArrayList<CrimeVO> cyunsu = (ArrayList<CrimeVO>) dao.selectcrimeyunsu();
-		ArrayList<CrimeVO> csamsan = (ArrayList<CrimeVO>) dao.selectcrimesamsan();
-		ArrayList<CrimeVO> cnonhyeon = (ArrayList<CrimeVO>) dao.selectcrimenonhyeon();
-		
-		JSONArray carray = new JSONArray();
-		JSONObject cobj = new JSONObject();
-
-		carray.add(forcrime(cjungbu, "a"));
-		carray.add(forcrime(cnambu, "b"));
-		carray.add(forcrime(cnamdong, "c"));
-		carray.add(forcrime(cbupheung, "d"));
-		carray.add(forcrime(cseobu, "e"));
-		carray.add(forcrime(cgyeyang, "f"));
-		carray.add(forcrime(cganghwa, "g"));
-		carray.add(forcrime(cyunsu, "h"));
-		carray.add(forcrime(csamsan, "i"));
-		carray.add(forcrime(cnonhyeon, "j"));
-
-		cobj.put("chartData", carray);
-
-		return cobj;
+	public List<SidoVO> selectSigunguName(SidoVO sidoVO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectSigunguName(sidoVO);
 	}
-	
-	// JSON 형식의 Chart 변환하기
-		public JSONObject forcrime(ArrayList<CrimeVO> tc, String cstr) {
-			JSONObject ctemp = new JSONObject();
-			JSONArray cja = new JSONArray();
-
-			for (int i = 0; i < tc.size(); i++) {
-				if (i == 0) {
-					if (cstr == "a") {
-						ctemp.put("name", "중부서");
-					} else if (cstr == "b") {
-						ctemp.put("name", "남부서");
-					} else if (cstr == "c") {
-						ctemp.put("name", "남동서");
-					} else if (cstr == "d") {
-						ctemp.put("name", "부평서");
-					} else if (cstr == "e") {
-						ctemp.put("name", "서부서");
-					} else if (cstr == "f") {
-						ctemp.put("name", "계양서");
-					} else if (cstr == "g") {
-						ctemp.put("name", "강화서");
-					} else if (cstr == "h") {
-						ctemp.put("name", "연수서");
-					} else if (cstr == "i") {
-						ctemp.put("name", "삼산서");
-					} else if (cstr == "j") {
-						ctemp.put("name", "논현서");
-					}
-				}
-				
-				if (cstr == "a") {
-					cja.add(tc.get(i).getJungbu());
-				} else if (cstr == "b") {
-					cja.add(tc.get(i).getNambu());
-				} else if (cstr == "c") {
-					cja.add(tc.get(i).getNamdong());
-				} else if (cstr == "d") {
-					cja.add(tc.get(i).getBupheung());
-				} else if (cstr == "e") {
-					cja.add(tc.get(i).getSeobu());
-				} else if (cstr == "f") {
-					cja.add(tc.get(i).getGyeyang());
-				} else if (cstr == "g") {
-					cja.add(tc.get(i).getGanghwa());
-				} else if (cstr == "h") {
-					cja.add(tc.get(i).getYunsu());
-				} else if (cstr == "i") {
-					cja.add(tc.get(i).getSamsan());
-				} else if (cstr == "j") {
-					cja.add(tc.get(i).getNonhyeon());
-				}
-			}
-			ctemp.put("data", cja);
-			return ctemp;
-		}
 }

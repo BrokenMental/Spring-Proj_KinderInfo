@@ -24,45 +24,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT etc
 		FROM chartd
 	</select>
+	<select id="selectcinm" resultType="us.inhatc.domain.Chart_cinVO">
+		SELECT *
+		FROM cin
+	</select>
 	
-	<select id="selectcrimejungbu" resultType="us.inhatc.domain.CrimeVO">
-		SELECT jungbu
-		FROM incheon_crime_rate
+	<select id="selectchartcin" resultType="us.inhatc.domain.Chart_cinVO">
+		SELECT *
+		FROM cin
 	</select>
-	<select id="selectcrimenambu" resultType="us.inhatc.domain.CrimeVO">
-		SELECT nambu
-		FROM incheon_crime_rate
+	
+	<select id="selectSidoName" resultType="us.inhatc.domain.SidoVO">
+		SELECT sidoName
+		FROM sido_code
 	</select>
-	<select id="selectcrimenamdong" resultType="us.inhatc.domain.CrimeVO">
-		SELECT namdong
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimebupheung" resultType="us.inhatc.domain.CrimeVO">
-		SELECT bupheung
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimeseobu" resultType="us.inhatc.domain.CrimeVO">
-		SELECT seobu
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimegyeyang" resultType="us.inhatc.domain.CrimeVO">
-		SELECT gyeyang
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimeganghwa" resultType="us.inhatc.domain.CrimeVO">
-		SELECT ganghwa
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimeyunsu" resultType="us.inhatc.domain.CrimeVO">
-		SELECT yunsu
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimesamsan" resultType="us.inhatc.domain.CrimeVO">
-		SELECT samsan
-		FROM incheon_crime_rate
-	</select>
-	<select id="selectcrimenonhyeon" resultType="us.inhatc.domain.CrimeVO">
-		SELECT nonhyeon
-		FROM incheon_crime_rate
+	<select id="selectSigunguName" resultType="us.inhatc.domain.SidoVO">
+		select sigunguName
+		from sigungu_code
+		where sigunguCode like concat((select sidoCode from sido_code where sidoName = #{sidoName}),'%');
 	</select>
 </mapper>

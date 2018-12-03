@@ -1,23 +1,27 @@
 package us.inhatc.controller;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
+import us.inhatc.domain.SidoVO;
 import us.inhatc.service.KinderService;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class KinderController {
-	
-	//private static final Logger logger = LoggerFactory.getLogger(GridController.class);
 
 	@Inject
 	private KinderService service;
@@ -28,10 +32,8 @@ public class KinderController {
 			model.addAttribute("jdata",service.selectgrid());
 			
 			JSONObject servicecomb = service.selectchart();
+			System.out.println(servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
-			
-			JSONObject servicecrime = service.selectcrime();
-			model.addAttribute("crimedata",servicecrime.toString().substring(13,servicecrime.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,10 +60,6 @@ public class KinderController {
 		try {
 			model.addAttribute("jdata",service.selectgrid());
 			
-			//JSONObject servicecomb = service.selectgrid();
-			//model.addAttribute("gdata",servicecomb.toString().substring(12,servicecomb.toString().length()-10));
-			//model.addAttribute("gdatasize",servicecomb.toString().substring(servicecomb.toString().length()-2,servicecomb.toString().length()-1));
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,13 +72,49 @@ public class KinderController {
 		
 		
 		try {
-			JSONObject servicecomb = service.selectchart();
-			//System.out.println(servicecomb.toString().substring(13,servicecomb.toString().length()-1));
-			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
+			JSONObject servicecomb = service.selectchart_cin();
+			model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.toString().length()-1));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return "/func/chart";
+	}
+	
+	@RequestMapping(value = "/area")
+	public ModelAndView area(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletRequest request) throws Exception {
+		
+		ArrayList<SidoVO> selectSidoName = (ArrayList<SidoVO>)service.selectSidoName(SidoVO);
+    	model.put("selectSidoName", selectSidoName);
+    	
+//    	ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
+//    	model.put("selectSigunguName", selectSigunguName);
+		
+    	ModelAndView mav = new ModelAndView();
+    	mav.setViewName("func/area");
+    	
+		return mav;
+	}
+	
+	@RequestMapping(value = "/changeSel")
+	public void selectBook(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String param) throws Exception{
+		
+		String sidoName = param;
+		SidoVO.setSidoName(sidoName);
+		System.out.println(sidoName);
+		
+		ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
+        System.out.println(selectSigunguName);
+        
+        JSONArray jsonArray = new JSONArray();
+        for(int i=0; i<selectSigunguName.size(); i++) {
+        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
+        }
+        
+        PrintWriter pw = res.getWriter();
+        pw.print(jsonArray.toString());
+        pw.flush();
+        pw.close();
 	}
 }

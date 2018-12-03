@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>유치원 정보 검색 사이트</title>
+<title>아이키우기 좋은동네</title>
+<link rel="shortcut icon" href="resources/img/baby.png">
 </head>
 <body>
 	<div class="backdiv" id="header">
@@ -13,16 +14,17 @@
 	</div>
 	<div class="backdiv" id="map">
 		<div class="frontdiv" id="realgrid"></div>
-		<div class="frontdiv" id="detaildiv"></div>
+		<div class="frontdiv" id="detaildiv">
+			<p id="detailP"></p>
+			<!-- <div id="container"></div> -->
+			<div id="highchart"></div>
+		</div>
 	</div>
-	<h1>지역정보</h1>
-	<div class="backdiv" id="container"></div>
-	<div class="backdiv" id="highchart"></div>
 	<!--response data start-->
 	<script type="text/javascript">
 		var jdata = ${jdata};
 		var cdata = ${cdata};
-		var crimedata = ${crimedata};
+		var detv = document.getElementById("detaildiv");
 	</script>
 	<!--response data end-->
 
@@ -53,9 +55,5 @@
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
-	
-	<script>
-		//document.getElementById("detaildiv").style.display="none";
-	</script>
 </body>
 </html>

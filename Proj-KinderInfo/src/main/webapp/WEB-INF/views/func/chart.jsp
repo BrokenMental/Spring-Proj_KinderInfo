@@ -10,7 +10,7 @@
 	min-width: 310px;
 	max-width: 800px;
 	height: 400px;
-	margin: 0 auto
+	margin: 0 auto;
 }
 </style>
 </head>
@@ -22,19 +22,31 @@
 <script src="resources/exporting.js"></script>
 <script src="resources/export-data.js"></script>
 <script type="text/javascript">
+	var cdata = ${cdata};
+	//console.log(cdata);
 	Highcharts.chart('container', {
 
 		title : {
-			text : 'Solar Employment Growth by Sector, 2010-2016'
+			text : '인천 인구 유입률 2014-2018'
 		},
 
 		subtitle : {
-			text : 'Source: thesolarfoundation.com'
+			text : 'Source: 공공데이터 포털'
 		},
 
+		xAxis : {
+			categories: [2014, 2015, 2016, 2017, 2018],
+	        //minRange: 3, // 데이터를 중심으로 총 몇개의 x 데이터를 표현할것인지 설정
+        	gridLineWidth: 1, // 라인 굵기
+        	gridZIndex: 4, // 구분선과 차트간의 거리
+            //offset: 10 // 0의 y.bottom margin
+		},
+		
 		yAxis : {
+	        floor: 0, // y축 최소값
+	        ceiling: 7000, // y축 최대값
 			title : {
-				text : 'Number of Employees'
+				text : 'Year'
 			}
 		},
 		legend : {
@@ -48,11 +60,11 @@
 				label : {
 					connectorAllowed : false
 				},
-				pointStart : 2010
+				pointStart : 2014 // 시작지점, 시작지점이 정해져있으면 xAxis를 무시한다.
 			}
 		},
 
-		series : ${cdata},
+		series : cdata,
 
 		responsive : {
 			rules : [ {

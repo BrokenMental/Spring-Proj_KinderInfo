@@ -5,11 +5,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Naver Map</title>
-<script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
+	<style>
+		body{
+			height: 800px;
+		}
+		
+		#detaildiv {
+			width: 99%;
+			height: 300px;
+			top: -305px;
+			margin: auto;
+			border: 1px solid;
+			background-color: white;
+			z-index: 500;
+			position: relative;
+		}
+	</style>
 </head>
 <body>
 	<div id="map" style="width: 100%; height: 800px;"></div>
+	<div id="detaildiv"></div>
+	<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
 	<script>
 		var jdata = ${jdata};
 		var markers = [], adds = []; // markers : 피커 정보, adds : 주소
@@ -43,7 +60,11 @@
 				markers.push(marker);
 				adds.push(result.items[0].address);
 	
-				var infowindow = new naver.maps.InfoWindow();
+				var infowindow = new naver.maps.InfoWindow({
+				    maxWidth: 300,
+					borderWidth: 5,
+					borderColor: "#2db400" //초록
+				});
 				
 				naver.maps.Event.addListener(marker, "click", function(e) {
 					for(var j=0; j<markers.length; j++){
@@ -54,8 +75,23 @@
 										infowindow.close();
 									} else {
 							 		    map.setCenter(marker.position);
-							 		    map.setZoom(8, true);
-										infowindow.setContent(jdata.kinderInfo[k].kindername);
+							 		    var contStrst = [
+							 		    	'<div style="text-align:center;">',
+							 		        '   <h4>'
+							 		    ].join('');
+							 		    var contStrce = [
+							 		    	'</h4>',
+							 		        '   <p>',
+							 		        '		<input type="button" value="상세보기" onclick="'
+							 		    ].join('');
+							 		    var contStren = [
+							 		    	'">',
+							 		        '   </p>',
+							 		        '</div>'
+							 		    ].join('');
+							 		    //console.log(typeof(jdata.kinderInfo[k].kindername));
+							 		    //map.setZoom(8, true); // 다른 피커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
+										infowindow.setContent(contStrst + jdata.kinderInfo[k].kindername + contStrce + detailFunc(jdata.kinderInfo[k].kindername) + contStren);
 										infowindow.open(map, marker);
 										//for(var iw in infowindow.getContent()){
 										//	console.log("infowindow : " + iw);
@@ -69,6 +105,20 @@
 				});
 			});
 		}
+		
+		var detv = document.getElementById("detaildiv");
+		
+		detv.style.display="none";
+		function detailFunc(strv){
+			if(detv.style.display=="block"){
+				detv.style.display="none";
+			}else{
+				console.log("hi");
+				detv.style.display="block";
+				detv.innerHTML=strv;
+			}
+		}
+		
 	</script>
 </body>
 </html>

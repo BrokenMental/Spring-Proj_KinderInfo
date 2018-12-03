@@ -100,6 +100,8 @@
 	    //var data = ${jdata};
 	    dataProvider.setRows(${jdata}.kinderInfo);
 	    
+	    console.log(${jdata}.kinderInfo[0]);
+	    
 	    // 아래와 같은 형식으로 넣어도 무방하다.
 	    /* var data = [
 	        ["data1", "data2", "data3"]
