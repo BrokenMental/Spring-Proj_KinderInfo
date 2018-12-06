@@ -98,7 +98,7 @@ public class KinderController {
 	}
 	
 	@RequestMapping(value = "/changeSel")
-	public void selectBook(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String param) throws Exception{
+	public void changeSel(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String param) throws Exception{
 		
 		String sidoName = param;
 		SidoVO.setSidoName(sidoName);
@@ -109,12 +109,34 @@ public class KinderController {
         
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<selectSigunguName.size(); i++) {
-        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
+        	jsonArray.add(selectSigunguName.get(i));
         }
         
         PrintWriter pw = res.getWriter();
         pw.print(jsonArray.toString());
         pw.flush();
         pw.close();
+	}
+	
+	@RequestMapping(value = "/search")
+	public void search(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String sidoName, String sigunguName) throws Exception{
+		
+		String sdName = sidoName;
+		String sggName = sigunguName;
+		System.out.println(sdName);
+		System.out.println(sggName);
+		
+//		ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
+//        System.out.println(selectSigunguName);
+//        
+//        JSONArray jsonArray = new JSONArray();
+//        for(int i=0; i<selectSigunguName.size(); i++) {
+//        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
+//        }
+//        
+//        PrintWriter pw = res.getWriter();
+//        pw.print(jsonArray.toString());
+//        pw.flush();
+//        pw.close();
 	}
 }

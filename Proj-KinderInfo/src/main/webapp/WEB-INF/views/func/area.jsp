@@ -13,26 +13,39 @@
 </style>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-function change_sel(sidoName) {
+function change_sel() {
+	
+	var sdName = $("#sidoName option:checked").text();
+	console.log(sdName);
+	
 	$.ajax({
 		type: "POST",
 		url: "/changeSel",
 		dataType:"json",
-		data: {param:sidoName},
+		data: {param:sdName},
 		success: function(result){
-			console.log(result);
 			$("#sigunguName").find("option").remove().end().append("<option value='all'>-선택-</option>");
-			
 			$.each(result, function(i) {
-				console.log(result[i]);
-				$("#sigunguName").append("<option value='"+result[i]+"'>"+result[i]+"</option>");
+				$("#sigunguName").append("<option value='"+result[i].sigunguCode+"'>"+result[i].sigunguName+"</option>");
 			});
-			
-			/* for(var count = 0; count < result.size(); count++){                
-            	var option = $("<option>"+result[count]+"</option>");
-            	console.log(count);
-                $('#sigunguName').append(option);
-            } */
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert("오류가 발생하였습니다.");
+		}                     
+	});
+}
+
+function search() {
+	var sidoName = $("#sidoName").val();
+	var sigunguName = $("#sigunguName").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/search",
+		dataType:"json",
+		data: {sidoName:sidoName,sigunguName:sigunguName},
+		success: function(result){
+			console.log(1);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert("오류가 발생하였습니다.");
@@ -46,19 +59,22 @@ function change_sel(sidoName) {
 		<tr>
 			<td>지역</td>
 			<td>
-			<select name="sidoName" onchange="change_sel(this.value)">
-				<option>-선택-</option>
-				<c:if test="${!empty selectSidoName }">
-					<c:forEach var="cd" items="${selectSidoName }" varStatus="i">
-						<option value="${cd.sidoName }"<c:if test="${cd.sidoName eq sidoName }">selected</c:if>>${cd.sidoName}</option>
-					</c:forEach>	
-				</c:if>
-			</select>
+				<select name="sidoName" id="sidoName" onchange="change_sel()">
+					<option>-선택-</option>
+					<c:if test="${!empty selectSidoName }">
+						<c:forEach var="cd" items="${selectSidoName }" varStatus="i">
+							<option value="${cd.sidoCode }"<c:if test="${cd.sidoName eq sidoName }">selected</c:if>>${cd.sidoName}</option>
+						</c:forEach>	
+					</c:if>
+				</select>
 			</td>
 			<td>
-			<select id="sigunguName" name="sigunguName">
-				<option value='all'>-선택-</option>
-			</select>
+				<select id="sigunguName" name="sigunguName">
+					<option value='all'>-선택-</option>
+				</select>
+			</td>
+			<td>
+				<input type="button" name="btnSearch" id="btnSearch" value="조회" onclick="search()">
 			</td>
 		</tr>
 	</table>
