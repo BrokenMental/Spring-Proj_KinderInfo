@@ -178,4 +178,20 @@ public class KinderServiceImpl implements KinderService {
 		// TODO Auto-generated method stub
 		return dao.selectSigunguName(sidoVO);
 	}
+
+	@Override
+	public JSONObject selectKinderList(SidoVO sidoVO) throws Exception {
+		// JSON형식의 페이지 URL
+		
+		String jsdata = "{\"kinderInfo\":[" + readJsonFromUrl(
+				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode="+sidoVO.getSidoCode()+"&sggCode="+sidoVO.getSigunguCode())+ "]}";
+		
+		System.out.println("여기야 jsdata : " + jsdata);
+		JSONParser ps = new JSONParser();
+		JSONObject jobj = (JSONObject) ps.parse(jsdata);
+
+		// jobj.get("kinderInfo") //JSONObject 내의 속성 뽑아내는 방법
+
+		return jobj;
+	}
 }

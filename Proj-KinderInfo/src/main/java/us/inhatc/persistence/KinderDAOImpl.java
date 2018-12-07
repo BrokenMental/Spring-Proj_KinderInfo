@@ -1,7 +1,6 @@
 package us.inhatc.persistence;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
