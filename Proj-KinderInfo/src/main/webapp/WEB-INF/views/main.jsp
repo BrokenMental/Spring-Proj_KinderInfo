@@ -22,8 +22,8 @@
 	</div>
 	<!--response data start-->
 	<script type="text/javascript">
-		var jdata = ${jdata};
-		var cdata = ${cdata};
+		var jdata = ${jdata}; //grid 데이터
+		var cdata = ${cdata}; //chart 데이터
 		var detv = document.getElementById("detaildiv");
 	</script>
 	<!--response data end-->

@@ -186,7 +186,6 @@ public class KinderServiceImpl implements KinderService {
 		String jsdata = "{\"kinderInfo\":[" + readJsonFromUrl(
 				"http://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do?key=cba3828f0113465fa66bc6123d70903f&sidoCode="+sidoVO.getSidoCode()+"&sggCode="+sidoVO.getSigunguCode())+ "]}";
 		
-		System.out.println("여기야 jsdata : " + jsdata);
 		JSONParser ps = new JSONParser();
 		JSONObject jobj = (JSONObject) ps.parse(jsdata);
 

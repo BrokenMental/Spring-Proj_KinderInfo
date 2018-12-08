@@ -49,4 +49,7 @@ gridView.setColumns(columns);
 
 // json 형식 데이터 넣기
 //var data = ${jdata};
-dataProvider.setRows(jdata.kinderInfo);
+function gridinput(jd){
+	jdata = jd;
+	dataProvider.setRows(jdata.kinderInfo);
+}
