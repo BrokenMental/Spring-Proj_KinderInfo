@@ -29,8 +29,11 @@ public class KinderController {
 	private KinderService service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Model model, SidoVO SidoVO) {
 		try {
+			ArrayList<SidoVO> selectSidoName = (ArrayList<SidoVO>)service.selectSidoName(SidoVO);
+	    	model.addAttribute("selectSidoName", selectSidoName);
+	    	
 			model.addAttribute("jdata",service.selectgrid());
 			
 			JSONObject servicecomb = service.selectchart();
