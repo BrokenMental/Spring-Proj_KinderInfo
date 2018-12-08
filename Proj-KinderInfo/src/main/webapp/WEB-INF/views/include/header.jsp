@@ -9,19 +9,29 @@
 </head>
 <body>
 	<div class="top_fix_zone" id="topBar">
-		지역 
-		<select>
-			<option>인천</option>
-		</select>
-		<select>
-			<option>미추홀구</option>
-		</select><br>
-		조건 
-		<input type="checkbox" name="chk1" value="통학차량">통학차량
-		<input type="checkbox" name="chk1" value="급식">급식
-		<input type="checkbox" name="chk1" value="국공립">국공립
-		<input type="checkbox" name="chk1" value="사립">사립
-		<input type="button" name="search" value="검색">
+		<table>
+			<tr>
+				<td>지역</td>
+				<td>
+					<select name="sidoName" id="sidoName" onchange="change_sel()">
+						<option>-선택-</option>
+						<c:if test="${!empty selectSidoName }">
+							<c:forEach var="cd" items="${selectSidoName }" varStatus="i">
+								<option value="${cd.sidoCode }"<c:if test="${cd.sidoName eq sidoName }">selected</c:if>>${cd.sidoName}</option>
+							</c:forEach>	
+						</c:if>
+					</select>
+				</td>
+				<td>
+					<select id="sigunguName" name="sigunguName">
+						<option value='all'>-선택-</option>
+					</select>
+				</td>
+				<td>
+					<input type="button" name="btnSearch" id="btnSearch" value="조회" onclick="search()">
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

@@ -35,11 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectSidoName" resultType="us.inhatc.domain.SidoVO">
-		SELECT sidoName
+		SELECT *
 		FROM sido_code
 	</select>
 	<select id="selectSigunguName" resultType="us.inhatc.domain.SidoVO">
-		select sigunguName
+		select *
 		from sigungu_code
 		where sigunguCode like concat((select sidoCode from sido_code where sidoName = #{sidoName}),'%');
 	</select>

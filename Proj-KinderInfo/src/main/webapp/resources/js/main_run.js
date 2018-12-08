@@ -41,3 +41,45 @@ function detailFunc(){
 	}
 }
 //상세보기 창 컨트롤 end
+
+//시도셀렉트박스 선택 시
+function change_sel() {
+	
+	var sdName = $("#sidoName option:checked").text();
+	console.log(sdName);
+	
+	$.ajax({
+		type: "POST",
+		url: "/changeSel",
+		dataType:"json",
+		data: {param:sdName},
+		success: function(result){
+			$("#sigunguName").find("option").remove().end().append("<option value='all'>-선택-</option>");
+			$.each(result, function(i) {
+				$("#sigunguName").append("<option value='"+result[i].sigunguCode+"'>"+result[i].sigunguName+"</option>");
+			});
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert("오류가 발생하였습니다.");
+		}                     
+	});
+}
+
+//조회버튼 함수
+function search() {
+	var sidoCode = $("#sidoName").val();
+	var sigunguCode = $("#sigunguName").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/search",
+		dataType:"json",
+		data: {sidoCode:sidoCode,sigunguCode:sigunguCode},
+		success: function(jdata){
+			dataProvider.setRows(jdata.kinderInfo);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert("오류가 발생하였습니다.");
+		}                     
+	});
+}

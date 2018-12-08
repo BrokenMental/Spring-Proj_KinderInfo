@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,12 +29,14 @@ public class KinderController {
 	private KinderService service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Model model, SidoVO SidoVO) {
 		try {
+			ArrayList<SidoVO> selectSidoName = (ArrayList<SidoVO>)service.selectSidoName(SidoVO);
+	    	model.addAttribute("selectSidoName", selectSidoName);
+	    	
 			model.addAttribute("jdata",service.selectgrid());
 			
 			JSONObject servicecomb = service.selectchart();
-			System.out.println(servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 			model.addAttribute("cdata",servicecomb.toString().substring(13,servicecomb.toString().length()-1));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,23 +102,38 @@ public class KinderController {
 	}
 	
 	@RequestMapping(value = "/changeSel")
-	public void selectBook(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String param) throws Exception{
+	public void changeSel(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, String param) throws Exception{
 		
 		String sidoName = param;
 		SidoVO.setSidoName(sidoName);
-		System.out.println(sidoName);
 		
 		ArrayList<SidoVO> selectSigunguName = (ArrayList<SidoVO>)service.selectSigunguName(SidoVO);
-        System.out.println(selectSigunguName);
         
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<selectSigunguName.size(); i++) {
-        	jsonArray.add(selectSigunguName.get(i).getSigunguName());
+        	jsonArray.add(selectSigunguName.get(i));
         }
         
         PrintWriter pw = res.getWriter();
         pw.print(jsonArray.toString());
         pw.flush();
         pw.close();
+	}
+	
+	@RequestMapping(value = "/search")
+	public ResponseEntity<JSONObject> search(@ModelAttribute SidoVO SidoVO, ModelMap model, HttpServletResponse res, HttpServletRequest request, int sidoCode, int sigunguCode) throws Exception{
+		
+		ResponseEntity<JSONObject> entity = null;
+		
+		int sdCode = sidoCode;
+		int sggCode = sigunguCode;
+		
+		SidoVO.setSidoCode(sdCode);
+		SidoVO.setSigunguCode(sggCode);
+		
+		entity = new ResponseEntity<JSONObject>(service.selectKinderList(SidoVO), HttpStatus.OK);
+		
+		//model.addAttribute("jdata",service.selectKinderList(SidoVO));
+		return entity;
 	}
 }
