@@ -77,7 +77,6 @@ function search() {
 		success: function(jdata){
 			mappic(jdata);
 			gridinput(jdata);
-			adds.length = 0;
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert("오류가 발생하였습니다.");

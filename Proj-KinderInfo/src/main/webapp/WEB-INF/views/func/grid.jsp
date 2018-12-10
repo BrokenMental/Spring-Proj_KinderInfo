@@ -11,6 +11,9 @@
 </head>
 
 <body>
+	<div class="backdiv" id="header">
+		<%@include file="../include/header.jsp"%>
+	</div>
 	<div id="realgrid" style="width: 100%; height: 600px;"></div>
 </body>
 <script type="text/javascript" src="resources/realgridjs-lic.js"></script>
@@ -98,9 +101,7 @@
 
 		// json 형식 데이터 넣기
 	    //var data = ${jdata};
-	    dataProvider.setRows(${jdata}.kinderInfo);
-	    
-	    console.log(${jdata}.kinderInfo[0]);
+	    //dataProvider.setRows(${jdata}.kinderInfo);
 	    
 	    // 아래와 같은 형식으로 넣어도 무방하다.
 	    /* var data = [
@@ -155,6 +156,47 @@
     	  $(".total-page-view").text(${jdata}.kinderInfo.length);
     	}
 	});
+
+	//시도셀렉트박스 선택 시
+	function change_sel() {
+		
+		var sdName = $("#sidoName option:checked").text();
+		
+		$.ajax({
+			type: "POST",
+			url: "/changeSel",
+			dataType:"json",
+			data: {param:sdName},
+			success: function(result){
+				$("#sigunguName").find("option").remove().end().append("<option value='all'>-선택-</option>");
+				$.each(result, function(i) {
+					$("#sigunguName").append("<option value='"+result[i].sigunguCode+"'>"+result[i].sigunguName+"</option>");
+				});
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert("오류가 발생하였습니다.");
+			}                     
+		});
+	}
+
+	//조회버튼 함수
+	function search() {
+		var sidoCode = $("#sidoName").val();
+		var sigunguCode = $("#sigunguName").val();
+		
+		$.ajax({
+			type: "POST",
+			url: "/search",
+			dataType:"json",
+			data: {sidoCode:sidoCode,sigunguCode:sigunguCode},
+			success: function(jdata){
+			    dataProvider.setRows(jdata.kinderInfo);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				alert("오류가 발생하였습니다.");
+			}                     
+		});
+	}
 </script>
 
 </html>
