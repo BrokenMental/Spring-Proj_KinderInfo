@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +78,42 @@ public class KinderServiceImpl implements KinderService {
 			resultJ.put("chartD", tempA);
 		}
 		return resultJ;
+	}
+
+	@Override
+	public String selectNews(String sdName, String sigunguName) throws Exception {
+		String clientId = "0qXYAmRCeHPKrvdChXeu";//애플리케이션 클라이언트 아이디값";
+		String clientSecret = "FlNUhSqBup";//애플리케이션 클라이언트 시크릿값";
+        String text = URLEncoder.encode(sdName +" "+ sigunguName + "유치원", "UTF-8");
+        String apiURL = "https://openapi.naver.com/v1/search/news?query="+ text;
+        URL url = new URL(apiURL);
+        BufferedReader br;
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        
+	    try {
+	        con.setRequestMethod("GET");
+	        con.setRequestProperty("X-Naver-Client-Id", clientId);
+	        con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+	        int responseCode = con.getResponseCode();
+	        
+	        if(responseCode==200) { // 정상 호출
+	            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	        } else {  // 에러 발생
+	            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	        }
+	        
+	        while ((inputLine = br.readLine()) != null) {
+	            response.append(inputLine);
+	        }
+	        br.close();
+	        //System.out.println(response.toString());
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
+		return response.toString();
 	}
 
 	// 참조 :

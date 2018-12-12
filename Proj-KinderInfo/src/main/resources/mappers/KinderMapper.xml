@@ -8,28 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM gridd
 	</select>
-	<select id="selectchartsolo" resultType="us.inhatc.domain.ChartVO">
-		SELECT solo
-		FROM chartd
-	</select>
-	<select id="selectcharttoget" resultType="us.inhatc.domain.ChartVO">
-		SELECT toget
-		FROM chartd
-	</select>
-	<select id="selectchartairtel" resultType="us.inhatc.domain.ChartVO">
-		SELECT airtel
-		FROM chartd
-	</select>
-	<select id="selectchartetc" resultType="us.inhatc.domain.ChartVO">
-		SELECT etc
-		FROM chartd
-	</select>
 	<select id="selectcinm" resultType="us.inhatc.domain.Chart_cinVO">
-		SELECT *
-		FROM cin
-	</select>
-	
-	<select id="selectchartcin" resultType="us.inhatc.domain.Chart_cinVO">
 		SELECT *
 		FROM cin
 	</select>
