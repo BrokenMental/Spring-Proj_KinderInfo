@@ -20,19 +20,12 @@
 			<div id="highchart"></div>
 		</div>
 	</div>
-	<!--response data start-->
-	<script type="text/javascript">
-		var jdata = ${jdata}; //grid 데이터
-		var cdata = ${cdata}; //chart 데이터
-		var detv = document.getElementById("detaildiv");
-	</script>
-	<!--response data end-->
 
 	<!--real grid start-->
 	<script type="text/javascript" src="resources/realgridjs-lic.js"></script>
 	<script type="text/javascript"
-		src="resources/realgridjs_eval.1.1.29.min.js"></script>
-	<script type="text/javascript" src="resources/realgridjs-api.1.1.29.js"></script>
+		src="resources/realgridjs_eval.1.1.34.min.js"></script>
+	<script type="text/javascript" src="resources/realgridjs-api.1.1.34.js"></script>
 	<script type="text/javascript" src="resources/jszip.min.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="resources/js/grid.js"></script>
@@ -47,13 +40,20 @@
 	<!--high chart end-->
 
 	<!--naver map start-->
-	<script type="text/javascript"
-		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
+	<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script> -->
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=mff8ditlf7&submodules=geocoder"></script>
 	<script src="resources/js/map.js"></script>
 	<!--naver map start end-->
 
 	<!-- mapping code start -->
 	<script src="resources/js/main_run.js"></script>
 	<!-- mapping code end -->
+	
+	<!--response data start-->
+	<script type="text/javascript">
+		var jdata = ${jdata}; //grid 데이터
+		//var cdata = ${cdata}; //chart 데이터
+	</script>
+	<!--response data end-->
 </body>
 </html>

@@ -12,7 +12,7 @@ import us.inhatc.domain.GridVO;
 import us.inhatc.domain.SidoVO;
 
 @Repository
-public class KinderDAOImpl{
+public class KinderDAO{
 
 	@Inject
 	private SqlSession session;

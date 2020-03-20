@@ -32,6 +32,7 @@ gridView.onDataCellClicked = function(grid, index) {
 //Grid item Click Event(Chart 연동) end
 
 //상세보기 창 컨트롤 start
+var detv = document.getElementById("detaildiv");
 detv.style.display="none";
 function detailFunc(){
 	if(detv.style.display=="block"){

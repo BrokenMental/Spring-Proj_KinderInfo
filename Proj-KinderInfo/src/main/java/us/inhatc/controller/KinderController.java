@@ -22,11 +22,13 @@ public class KinderController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Model model, SidoVO SidoVO) {
 		try {
+			//처음부터 VO를 호출해도 되는 이유는 VO에서 가져오는 api Code가 0일 경우 status : SUCCESS이면서 아무 값도 안가져오기 때문.
 			ArrayList<SidoVO> selectSidoName = (ArrayList<SidoVO>)service.selectSidoName(SidoVO);
 	    	model.addAttribute("selectSidoName", selectSidoName);
 	    	
 			model.addAttribute("jdata",service.selectKinderList(SidoVO));
 			
+			//차트??? 뭐한거지
 			JSONObject servicecomb = service.selectchart_cin();
 			model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.toString().length()-1));
 		} catch (Exception e) {

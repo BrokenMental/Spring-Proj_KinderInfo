@@ -26,7 +26,7 @@
 	<div id="map" style="width: 100%; height: 800px;"></div>
 	<div id="detaildiv"></div>
 	<script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=EMVSTOQjBCVdZWa3CPxg&submodules=geocoder"></script>
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=mff8ditlf7&submodules=geocoder"></script>
 	<script>
 		var jdata = ${jdata};
 		var markers = [], adds = []; // markers : 피커 정보, adds : 주소

@@ -5,21 +5,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="us.inhatc.mappers.KinderMapper">
 	<select id="selectgrid" resultType="us.inhatc.domain.GridVO">
-		SELECT *
+		SELECT FIELD1
+			  ,FIELD2
+			  ,FIELD3
+			  ,FIELD4
+			  ,FIELD5
 		FROM gridd
 	</select>
+	
 	<select id="selectcinm" resultType="us.inhatc.domain.Chart_cinVO">
-		SELECT *
+		SELECT YEAR
+			  ,SEOUL
+			  ,BUSAN
+			  ,DAEGU
+			  ,GWANGJU
+			  ,DAEJEON
+			  ,ULSAN
+			  ,SEJONG
+			  ,GYEONGGI
+			  ,GANGWON
+			  ,CHUNGBUK
+			  ,CHUNGNAM
+			  ,JEONBUK
+			  ,JEONNAM
+			  ,GYEONGBUK
+			  ,GYEONGNAM
+			  ,JEJU
 		FROM cin
 	</select>
 	
 	<select id="selectSidoName" resultType="us.inhatc.domain.SidoVO">
-		SELECT *
+		SELECT SIDONAME
+			  ,SIDOCODE
 		FROM sido_code
 	</select>
+	
 	<select id="selectSigunguName" resultType="us.inhatc.domain.SidoVO">
-		select *
-		from sigungu_code
-		where sigunguCode like concat((select sidoCode from sido_code where sidoName = #{sidoName}),'%');
+		SELECT SIGUNGUNAME
+			  ,SIGUNGUCODE
+		FROM sigungu_code
+		WHERE SIGUNGUCODE LIKE CONCAT((SELECT SIDOCODE FROM sido_code WHERE SIDONAME = #{sidoName}),'%');
 	</select>
 </mapper>
