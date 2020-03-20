@@ -1,7 +1,7 @@
 /*-----------
   naver map
 -----------*/
-var markers = [], adds = []; // markers : 피커 정보, adds : 주소
+var markers = [], adds = []; // markers : 마커 정보, adds : 주소
 var map = new naver.maps.Map('map', {
 	//center : new naver.maps.LatLng(37.44802, 126.6553154),
 	zoom : 2
@@ -12,7 +12,7 @@ var infowindow = new naver.maps.InfoWindow({
 	borderColor: "#2db400" //초록
 });
 
-// 피커 정보창에 표시될 내용 start
+// 마커 정보창에 표시될 내용 start
 var contStart = [
 	 '<div style="text-align:center;">',
     '	<h4>'
@@ -25,18 +25,18 @@ var contEnd = [
     '  </p>',
     '</div>'
 ].join('');
-//피커 정보창에 표시될 내용 end
+//마커 정보창에 표시될 내용 end
 
 function mappic(jd){
 	jdata = jd;
 
-	// 기존에 표시되었던 피커 제거
+	// 기존에 표시되었던 마커 제거
 	if(markers.length > 1){
 		for(var h=0; h<markers.length; h++){
-			markers[h].onRemove(); // 기존 피커 제거
+			markers[h].onRemove(); // 기존 마커 제거
 			if (infowindow.getMap()) {
 				infowindow.close();
-				detv.style.display="none"; // 피커 정보창 사라질때 함께 상세정보창도 사라짐
+				detv.style.display="none"; // 마커 정보창 사라질때 함께 상세정보창도 사라짐
 			}
 		}
 		
@@ -61,7 +61,7 @@ function mappic(jd){
 					position : new naver.maps.LatLng(
 							result.items[0].point.y,
 							result.items[0].point.x),
-					map : map
+					map : map,
 				});
 
 	 		    map.setCenter(marker.position); // 해당 위치의 중심으로 이동
@@ -69,7 +69,8 @@ function mappic(jd){
 	 		    map.panTo(marker.position); // 해당 위치의 중심으로 이동, 현재위치와 거리가 가까우면 부드럽게 이동.
 
 				markers.push(marker);
-				adds.push(result.items[0].address);
+				//items[0] : 구 주소 '~동', items[1] : 신 주소 '~로'
+				adds.push(result.items[1].address);
 
 				naver.maps.Event.addListener(marker, "click", function(e) {
 					for (var j = 0; j < markers.length; j++) {
@@ -78,15 +79,15 @@ function mappic(jd){
 								if (adds[j].match((jdata.kinderInfo[k].addr))) {
 									if (infowindow.getMap()) {
 										infowindow.close();
-										detv.style.display="none"; // 피커 정보창 사라질때 함께 상세정보창도 사라짐
+										detv.style.display="none"; // 마커 정보창 사라질때 함께 상세정보창도 사라짐
 									} else {
 							 		    map.panTo(marker.position);
-							 		    //map.setZoom(8, true); // 다른 피커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
+							 		    //map.setZoom(8, true); // 다른 마커 선택 시 Zoom 레벨 변경하면 정보창 깨짐
 										infowindow.setContent(contStart + jdata.kinderInfo[k].kindername + " "+jdata.kinderInfo[k].establish + contEnd);
 										//detv.innerHTML=jdata.kinderInfo[k].kindername; // 기존내용 덮어쓰기 때문에 변경
 										$("#detailP *").remove(); // 기존 append 값 지우기(뒤에 *를 추가해 자식요소만 없앤다.)
 										
-										// 피커 선택시 상세정보창에 미리 입력
+										// 마커 선택시 상세정보창에 미리 입력
 							 		    $("#detailP").append("<b> 유치원 명 : " + jdata.kinderInfo[k].kindername
 							 		    		+ " " + jdata.kinderInfo[k].establish
 							 		    		+ " | 오픈시간 : " + jdata.kinderInfo[k].opertime

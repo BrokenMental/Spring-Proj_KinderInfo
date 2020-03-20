@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,12 @@ public class KinderController {
 	    	
 			model.addAttribute("jdata",service.selectKinderList(SidoVO));
 			
-			//차트??? 뭐한거지
-			JSONObject servicecomb = service.selectchart_cin();
-			model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.toString().length()-1));
+			//차트 : 인구이동 등으로 위험도를 표현하려고 했지만 연관관계가 많지 않아서 보류
+			/*
+			 * JSONObject servicecomb = service.selectchart_cin();
+			 * model.addAttribute("cdata",servicecomb.toString().substring(10,servicecomb.
+			 * toString().length()-1));
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

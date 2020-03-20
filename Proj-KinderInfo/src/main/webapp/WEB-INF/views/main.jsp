@@ -32,11 +32,11 @@
 	<!--real grid end-->
 
 	<!--high chart start-->
-	<script src="resources/highcharts.js"></script>
+	<!-- <script src="resources/highcharts.js"></script>
 	<script src="resources/series-label.js"></script>
 	<script src="resources/exporting.js"></script>
 	<script src="resources/export-data.js"></script>
-	<script src="resources/js/chart.js"></script>
+	<script src="resources/js/chart.js"></script> -->
 	<!--high chart end-->
 
 	<!--naver map start-->
