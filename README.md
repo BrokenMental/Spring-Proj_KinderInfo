@@ -13,9 +13,10 @@
 
 # 활용 지도 : Naver Map
 1. Naver Map 적용(완료)
-2. 유치원 & 어린이집 OPEN API 활용(진행중)
-3. 공공데이터 포털 데이터 - 범죄관련 데이터 활용(진행중)
-4. 픽커 클릭 이벤트 시 유치원&어린이집 정보 출력(진행중)
+2. 유치원 & 어린이집 OPEN API 활용
+3. 공공데이터 포털 데이터 - 시군구 코드 데이터 csv 활용(https://www.data.go.kr/data/15049974/fileData.do, https://www.data.go.kr/data/15049973/fileData.do)
+4. 공공데이터 포털 데이터 - 범죄관련 데이터 활용
+5. 픽커 클릭 이벤트 시 유치원&어린이집 정보 출력
 
 # 활용 그리드 : Toast Grid 3.0 -> Real Grid 1.1.29
 1. Toast Grid 적용 -> Real Grid 적용(완료)
