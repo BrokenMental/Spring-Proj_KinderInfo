@@ -135,7 +135,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.8</version>
+			<version>[3.5.6,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -168,7 +168,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>[4.13.1,)</version>
 			<scope>test</scope>
 		</dependency>
 
